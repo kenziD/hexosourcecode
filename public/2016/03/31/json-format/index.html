@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>json数据要用双引号 | kenziD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天遇到了一个json的坑，原来json里的字符串必须是双引号，我用单引号，sublime就提示高亮的错误，而且jquery的$.get()或者 $.getJSON()都没反应，调不到数据。改成双引号就一切ok了json 官方网站也是这么说的(double quote!)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="json数据要用双引号">
+<meta property="og:url" content="http://yoursite.com/2016/03/31/json-format/index.html">
+<meta property="og:site_name" content="kenziD">
+<meta property="og:description" content="今天遇到了一个json的坑，原来json里的字符串必须是双引号，我用单引号，sublime就提示高亮的错误，而且jquery的$.get()或者 $.getJSON()都没反应，调不到数据。改成双引号就一切ok了json 官方网站也是这么说的(double quote!)">
+<meta property="og:updated_time" content="2016-04-03T10:01:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="json数据要用双引号">
+<meta name="twitter:description" content="今天遇到了一个json的坑，原来json里的字符串必须是双引号，我用单引号，sublime就提示高亮的错误，而且jquery的$.get()或者 $.getJSON()都没反应，调不到数据。改成双引号就一切ok了json 官方网站也是这么说的(double quote!)">
+  
+    <link rel="alternative" href="/atom.xml" title="kenziD" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kenziD</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A Girl Who Love Programming</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-json-format" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/31/json-format/" class="article-date">
+  <time datetime="2016-03-31T06:24:47.000Z" itemprop="datePublished">2016-03-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      json数据要用双引号
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天遇到了一个json的坑，原来json里的字符串必须是双引号，我用单引号，sublime就提示高亮的错误，而且jquery的<br>$.get()或者 $.getJSON()都没反应，调不到数据。改成双引号就一切ok了<br><a href="http://www.json.org/index.html" target="_blank" rel="external">json 官方网站</a>也是这么说的(double quote!)</p>
+<a id="more"></a>
+<p>又遇到了一个坑，原来json里不能有注释的东西。</p>
+<p>由于jQuery使用get请求获取json data的时候出错了也不提示的。静默错误。</p>
+<blockquote>
+<p>it will fail silently unless the script has also called the global .ajaxError() method</p>
+</blockquote>
+<p>jQuery.get()会返回一个jqXHR对象，在1.5中是包含jqXHR.success(), jqXHR.error(), and jqXHR.complete()三个方法，其中jqXHR.error()可以处理错误，但是1.8之后都替换成了jqXHR.done(), jqXHR.fail(), and jqXHR.always()方法，其中jqXHR.fail()用来处理错误。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jqxhr = $.get( <span class="string">"example.json"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert( <span class="string">"success"</span> );</span><br><span class="line">&#125;)</span><br><span class="line"> .fail(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    alert(error);</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<p>可以看出错误的信息。</p>
+<p>不过最好用一些在线的json工具检查一下是否有错，这样就不会像无头苍蝇一样了。比如<a href="http://jsonlint.com/" target="_blank" rel="external">jsonlint</a></p>
+<p>gulp也有相关的<a href="https://www.npmjs.com/package/gulp-json-lint" target="_blank" rel="external">测试插件</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$.get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//success1!</span></span><br><span class="line">&#125;).done(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//success2!</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>有什么区别？</p>
+<p>为了搞清楚这个问题，不得不去看了javascript的各种回调方法。</p>
+<p>jquery本来的方法是用监听事件来实现，这里的get方法是底层ajax的简写。监听了success事件，然后才来执行success1<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">  <span class="attribute">url</span>: <span class="built_in">url</span>,</span><br><span class="line">  <span class="attribute">data</span>: data,</span><br><span class="line">  <span class="attribute">success</span>: success,</span><br><span class="line">  <span class="attribute">dataType</span>: dataType</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>后来又加了一个<a href="http://api.jquery.com/jQuery.Deferred/" target="_blank" rel="external">Deferred()</a>方法，是基于CommonJS Promises/A 设计的，返回一个promise对象（对应jqXHR对象），promise对象会有一个then方法（对应done方法），可以在异步任务完成后，才执行回调函数。所以两个都保留了下来。</p>
+<p>阮一峰的博客逻辑很清楚。<a href="http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html" target="_blank" rel="external">avascript异步编程的4种方法</a></p>
+<h2 id="json的知识点">json的知识点</h2><p>要区分清楚json对象，和json文本</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> str</span>= '&#123; <span class="string">"name"</span>: <span class="string">"张三"</span>, <span class="string">"sex"</span>: <span class="string">"男"</span> &#125;';   <span class="comment">//文本</span></span><br><span class="line"></span><br><span class="line"><span class="variable"><span class="keyword">var</span> obj</span>=str.parseJSON();   <span class="comment">//把其Json文本解析成为json对象   </span></span><br><span class="line"></span><br><span class="line">alert(obj.toJSONString()); <span class="comment">//把json对象转换成JSON 文本</span></span><br></pre></td></tr></table></figure>
+<p>所有highchart的函数都要写在$(function(){<br>    …..<br>})<br>里。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>等价于<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jQuery(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123; </span><br><span class="line">	<span class="comment">//	</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>等价于<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$<span class="comment">(document)</span>.ready<span class="comment">(funtion()</span>&#123;</span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>的缩写。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">jQuery(<span class="function"><span class="keyword">function</span><span class="params">($)</span></span>&#123;</span><br><span class="line">	<span class="comment">//最安全的写法。$作为局部变量。这样就不会和外面定义的$混淆了。</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/31/json-format/" data-id="cjls7psj0000sc6sgqo5hnp24" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/07/gitError/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          gitError
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/24/css-specifity/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CSS 权重</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pixhawk/">pixhawk</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protocal/">protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活，婚礼，朋友/">生活，婚礼，朋友</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科研/">科研</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodeJs-protocal/" style="font-size: 10px;">nodeJs,protocal</a> <a href="/tags/pixhawk/" style="font-size: 17.5px;">pixhawk</a> <a href="/tags/protocal/" style="font-size: 10px;">protocal</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/生活，婚礼，朋友/" style="font-size: 12.5px;">生活，婚礼，朋友</a> <a href="/tags/科研/" style="font-size: 12.5px;">科研</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <script src="/list-menu.js"></script>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 KenziD<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+       <p>Connect me by Rob10085@gmail.com</p>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

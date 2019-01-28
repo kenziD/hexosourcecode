@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>制作input下拉菜单 | kenziD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Demo画出输入框和图标
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing:border-box;
+}
+
+input {
+    border: 0;
+}
+
+#input-area {
+    border: 1px solid #e6e8e9;
+     padding: 0 10px;
+height: 30px;
+width: 150px;
+}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="制作input下拉菜单">
+<meta property="og:url" content="http://yoursite.com/2015/10/12/list-menu/index.html">
+<meta property="og:site_name" content="kenziD">
+<meta property="og:description" content="Demo画出输入框和图标
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing:border-box;
+}
+
+input {
+    border: 0;
+}
+
+#input-area {
+    border: 1px solid #e6e8e9;
+     padding: 0 10px;
+height: 30px;
+width: 150px;
+}">
+<meta property="og:updated_time" content="2015-10-13T02:36:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="制作input下拉菜单">
+<meta name="twitter:description" content="Demo画出输入框和图标
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing:border-box;
+}
+
+input {
+    border: 0;
+}
+
+#input-area {
+    border: 1px solid #e6e8e9;
+     padding: 0 10px;
+height: 30px;
+width: 150px;
+}">
+  
+    <link rel="alternative" href="/atom.xml" title="kenziD" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kenziD</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A Girl Who Love Programming</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-list-menu" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/12/list-menu/" class="article-date">
+  <time datetime="2015-10-12T08:23:42.000Z" itemprop="datePublished">2015-10-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      制作input下拉菜单
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Demo"><a href="https://jsfiddle.net/17wgtvp1/" target="_blank" rel="external">Demo</a></h2><h2 id="画出输入框和图标">画出输入框和图标</h2><style type="text/css">
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing:border-box;
+}
+
+input {
+    border: 0;
+}
+
+#input-area {
+    border: 1px solid #e6e8e9;
+     padding: 0 10px;
+height: 30px;
+width: 150px;
+}
+#last-input-area {
+    border: 1px solid #e6e8e9;
+    padding: 0 10px;
+    height: 30px;
+    width: 150px;
+}
+#final-input-area {
+    border: 1px solid #e6e8e9;
+    padding: 0 10px;
+    height: 30px;
+    width: 150px;
+}
+#icon {
+
+    width: 30px;
+    height: 30px;
+    background: url(http://ww4.sinaimg.cn/large/74311666jw1ewyg87xugqj2074074wel.jpg) no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    /*好厉害*/
+}
+   #menu{
+        border:1px solid #e6e8e9;
+
+        width: 150px;
+        background: white;
+          margin-left: -0.5px;
+        margin-top: -22px;
+    }
+#last-menu{
+position:absolute;
+display:none;
+        border:1px solid #e6e8e9;
+        width: 150px;
+        background: white;
+          margin-left: -0.5px;
+        margin-top: -22px;
+    }
+    #final-menu{
+position:absolute;
+display:none;
+        border:1px solid #e6e8e9;
+
+        width: 150px;
+        background: white;
+          margin-left: -0.5px;
+        margin-top: -22px;
+    }
+.list-menu{
+
+    font-size: 10px;
+    padding: 10px 0;
+    list-style-type: none;
+    }
+   .final-list-menu{
+
+    font-size: 10px;
+    padding: 10px 0;
+    list-style-type: none;
+
+}
+.list-menu:hover{
+    background: #eee;
+}
+.final-list-menu:hover{
+    background: #eee;
+}
+</style>
+
+
+<h4 id="消除两个元素之间的空格">消除两个元素之间的空格</h4><p>一般情况下，写html时都是有自动换行的：就像这样<br><a id="more"></a><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">input</span> id=<span class="string">"input-area"</span> type=<span class="string">'text'</span> placeholder=<span class="string">"输入你想搜索的内容"</span> &gt;</span><br><span class="line">&lt;<span class="selector-tag">input</span> id=<span class="string">"icon"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>CSS:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>:border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">input</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#input-area</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#e6e8e9</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">150px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#icon</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">url</span>(http://ww4.sinaimg.cn/large/74311666jw1ewyg87xugqj2074074wel.jpg) no-repeat;</span><br><span class="line">    <span class="attribute">background-size</span>: contain;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这时出来的效果是：</p>
+<p><input id="input-area" type="text" placeholder="输入你想搜索的内容"></p>
+<input id="icon" style="cursor: default;">
+
+<p>解决办法是：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"input-area"</span> <span class="attr">type</span>=<span class="string">'text'</span> <span class="attr">placeholder</span>=<span class="string">"输入你想搜索的内容"</span> &gt;</span><span class="comment">&lt;!--</span><br><span class="line">--&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"icon"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>这样就可以消除两行元素的空格变成在一行内。</p>
+<p><input id="input-area" type="text" placeholder="输入你想搜索的内容"><!--
+--><input id="icon" style="cursor: default;"></p>
+<h4 id="如何隐藏光标">如何隐藏光标</h4><p>你会发现上面的icon图标会有光标显现，如何隐藏光标呢？</p>
+<p>将icon的color设为tranparent即可。前提是你不需要在这个input内输入任何内容：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#icon</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>:tranparent;<span class="comment">//隐藏光标</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">background</span>: url(<span class="string">http://ww4.sinaimg.cn/large/74311666jw1ewyg87xugqj2074074wel.jpg</span>) no-repeat;</span><br><span class="line">    <span class="attribute">background-size</span>: contain;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><input id="input-area" type="text" placeholder="输入你想搜索的内容"><!--
+--><input id="icon" style="cursor: default;color:transparent;"></p>
+<h4 id="如何让鼠标显示出链接选择样式">如何让鼠标显示出链接选择样式</h4><p>作为icon的搜索图片，应该点击图片就能有搜索button的作用，但是鼠标移到上面时还是箭头，怎么办？要在外面套一个a标签吗？<br>更便捷的方法是，在CSS属性上加上:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#icon</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>:tranparent;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">background</span>: url(<span class="string">http://ww4.sinaimg.cn/large/74311666jw1ewyg87xugqj2074074wel.jpg</span>) no-repeat;</span><br><span class="line">    <span class="attribute">background-size</span>: contain;</span><br><span class="line">    <span class="attribute">cursor</span>:pointer;<span class="comment">//改变鼠标样式</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><input id="input-area" type="text" placeholder="输入你想搜索的内容"><!--
+--><input id="icon" style="cursor: default;color:transparent;cursor:pointer;"></p>
+<p>可以用Jquery的click事件进行链接。</p>
+<h2 id="制作下拉菜单">制作下拉菜单</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"input-area"</span> <span class="attr">type</span>=<span class="string">'text'</span> <span class="attr">placeholder</span>=<span class="string">"输入你想搜索的内容"</span> &gt;</span><span class="comment">&lt;!--</span><br><span class="line">--&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"icon"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"menu"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"list-menu list1"</span>&gt;</span>css课程<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"list-menu list2"</span>&gt;</span>javascript课程<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"list-menu list3"</span>&gt;</span>linux课程<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"list-menu list4"</span>&gt;</span>R课程<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"list-menu list5"</span>&gt;</span>C++课程<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>CSS:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="selector-id">#menu</span>&#123;</span><br><span class="line">        <span class="attribute">border</span>:<span class="number">1px</span> solid <span class="number">#e6e8e9</span>;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">150px</span>;</span><br><span class="line">        <span class="attribute">background</span>: white;</span><br><span class="line">      </span><br><span class="line">    &#125;</span><br><span class="line"><span class="selector-class">.list-menu</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">list-style-type</span>: none;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.list-menu</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#eee</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> <input id="input-area" type="text" placeholder="输入你想搜索的内容"><input id="icon" style="color:transparent;"><!-- 
+    --><ul id="menu"><br>     <li class="list-menu list1">css课程</li><!-- 
+     --><li class="list-menu list2">javascript课程</li><!-- 
+     --><li class="list-menu list3">linux课程</li><!-- 
+     --><li class="list-menu list4">R课程</li><!-- 
+     --><li class="list-menu list5">C++课程</li></ul></p>
+<h2 id="点击输入框时下拉菜单出现_点击其他位置下拉菜单隐藏">点击输入框时下拉菜单出现 点击其他位置下拉菜单隐藏</h2><p>一般情况下，下拉菜单应该是隐藏的，鼠标点击到输入框时浮现，点击网页的其他地方，下拉框消失。这需要用到JS和Jquery库。</p>
+<h4 id="点击输入框下拉框浮现">点击输入框下拉框浮现</h4><p>首先要在#menu加上display:none</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#menu</span>&#123;</span><br><span class="line">        <span class="attribute">display</span>: none;</span><br><span class="line">        <span class="attribute">border</span>:<span class="number">1px</span> solid <span class="number">#e6e8e9</span>;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">150px</span>;</span><br><span class="line">        <span class="attribute">background</span>: white;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>接下来实现点击input时display变为block即可。</p>
+<p>我最先想到的是<br>Javascript:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#input-area"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     $(<span class="string">"#menu"</span>).css(<span class="string">"display"</span>,<span class="string">"block"</span>);</span><br><span class="line">     <span class="comment">// body...</span></span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure></p>
+<p>但如何在其他地方点击，能够隐藏menu呢？<br>最终参考了<a href="https://api.jquery.com/event.target/" target="_blank" rel="external">Jquery的例程</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handler</span>(<span class="params"> event </span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> target = $( event.target );</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">if</span> ( target.is( $(<span class="string">"#input-area"</span>))  ) &#123;</span><br><span class="line">    $(<span class="string">"#menu"</span>).show();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    $(<span class="string">"#menu"</span>).hide();</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">"html"</span>).click(handler);</span><br></pre></td></tr></table></figure></p>
+<p>注意：hide(),show()函数只针对dispaly:none,对于visibility:hidden没有用。</p>
+<p><input id="last-input-area" type="text" placeholder="输入你想搜索的内容"><input id="icon" style="color:transparent;"><!-- 
+--><ul id="last-menu"><br> <li class="list-menu ">css课程</li><!-- 
+ --><li class="list-menu ">javascript课程</li><!-- 
+ --><li class="list-menu ">linux课程</li><!-- 
+ --><li class="list-menu ">R课程</li><!-- 
+ --><li class="list-menu ">C++课程</li><br> </ul></p>
+<p>顺便这里隆重推出absolute的用法，你会发现我的下拉菜单是覆盖在页面上的，如何实现的这个效果呢？直接在#menu中加上position:absolute属性即可，且父元素不要加position：relative.好神奇！其实我这篇文章也是根据这个课程引出的：<a href="http://www.imooc.com/video/4462" target="_blank" rel="external">absolute深入理解</a></p>
+<h2 id="鼠标选择下拉菜单选项填入input框内">鼠标选择下拉菜单选项填入input框内</h2><p>鼠标点击li标签的内容，返回其文本：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".list-menu"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(e.target.innerHTML);</span><br></pre></td></tr></table></figure></p>
+<p>其中e.target.innerHTML就是其文本。</p>
+<p>并将文本传入input框内：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".list-menu"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(e.target.innerHTML);</span><br><span class="line"> <span class="built_in">document</span>.getElementById(<span class="string">"input-area"</span>).value = e.target.innerHTML;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这里注意：Jquery的$(“#id”)和document.getElemenetById(“id”)是不完全一样的。document.getElemenetById(“id”)获得的直接是DOM对象，<br>而Jquery的$(“#id”)返回的是Jquery对象，是一个数组，用console.log()看一下就清楚了。<br>$(“#id”) = document.getElemenetById(“id”)。</p>
+</blockquote>
+<p>我是通过$(“#input-area”).value无法使用发现的。如果改成$(“#input-area”)[0].value就正确了</p>
+<p><input id="final-input-area" type="text" placeholder="输入你想搜索的内容"><input id="icon" style="color:transparent;"><!-- 
+--><ul id="final-menu"><br> <li class="final-list-menu ">css课程</li><!-- 
+ --><li class="final-list-menu">javascript课程</li><!-- 
+ --><li class="final-list-menu">linux课程</li><!-- 
+ --><li class="final-list-menu">R课程</li><!-- 
+ --><li class="final-list-menu">C++课程</li><br> </ul></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/12/list-menu/" data-id="cjls7psiv000oc6sgsdb3k9w3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/19/circle/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          纯CSS3制作动态饼状图
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/08/min-height-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">min-height:100%</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pixhawk/">pixhawk</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protocal/">protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活，婚礼，朋友/">生活，婚礼，朋友</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科研/">科研</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodeJs-protocal/" style="font-size: 10px;">nodeJs,protocal</a> <a href="/tags/pixhawk/" style="font-size: 17.5px;">pixhawk</a> <a href="/tags/protocal/" style="font-size: 10px;">protocal</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/生活，婚礼，朋友/" style="font-size: 12.5px;">生活，婚礼，朋友</a> <a href="/tags/科研/" style="font-size: 12.5px;">科研</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <script src="/list-menu.js"></script>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 KenziD<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+       <p>Connect me by Rob10085@gmail.com</p>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

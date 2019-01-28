@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>inline-block元素的诡异样式问题 | kenziD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录一次inline-block引起的诡异样式错位想在colorPicker后面加一个icon，点击增加就可以继续增加colorPicker，用了一个div套i标签，然后设置div为inline-block，但是发现这个div和前面的colorPicker的div怎么都不在一条水平线上。特别尴尬。同样都是inline-block布局，到底哪里出了问题。后来仔细看了zxx大佬的博客CSS深入理解ve">
+<meta property="og:type" content="article">
+<meta property="og:title" content="inline-block元素的诡异样式问题">
+<meta property="og:url" content="http://yoursite.com/2018/07/12/inline-block元素的诡异样式问题/index.html">
+<meta property="og:site_name" content="kenziD">
+<meta property="og:description" content="记录一次inline-block引起的诡异样式错位想在colorPicker后面加一个icon，点击增加就可以继续增加colorPicker，用了一个div套i标签，然后设置div为inline-block，但是发现这个div和前面的colorPicker的div怎么都不在一条水平线上。特别尴尬。同样都是inline-block布局，到底哪里出了问题。后来仔细看了zxx大佬的博客CSS深入理解ve">
+<meta property="og:image" content="http://yoursite.com/cssp.PNG">
+<meta property="og:image" content="http://yoursite.com/exa.png">
+<meta property="og:image" content="http://yoursite.com/a.gif">
+<meta property="og:image" content="http://yoursite.com/b.gif">
+<meta property="og:image" content="http://yoursite.com/c.gif">
+<meta property="og:updated_time" content="2018-07-12T13:54:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="inline-block元素的诡异样式问题">
+<meta name="twitter:description" content="记录一次inline-block引起的诡异样式错位想在colorPicker后面加一个icon，点击增加就可以继续增加colorPicker，用了一个div套i标签，然后设置div为inline-block，但是发现这个div和前面的colorPicker的div怎么都不在一条水平线上。特别尴尬。同样都是inline-block布局，到底哪里出了问题。后来仔细看了zxx大佬的博客CSS深入理解ve">
+<meta name="twitter:image" content="http://yoursite.com/cssp.PNG">
+  
+    <link rel="alternative" href="/atom.xml" title="kenziD" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kenziD</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A Girl Who Love Programming</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-inline-block元素的诡异样式问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/12/inline-block元素的诡异样式问题/" class="article-date">
+  <time datetime="2018-07-12T13:49:34.000Z" itemprop="datePublished">2018-07-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      inline-block元素的诡异样式问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="记录一次inline-block引起的诡异样式错位">记录一次inline-block引起的诡异样式错位</h3><p><img src="cssp.PNG" alt=""><br>想在colorPicker后面加一个icon，点击增加就可以继续增加colorPicker，<br>用了一个div套i标签，然后设置div为inline-block，但是发现这个div和前面的colorPicker的div怎么都不在一条水平线上。特别尴尬。<br>同样都是inline-block布局，到底哪里出了问题。<br>后来仔细看了zxx大佬的博客<a href="https://www.zhangxinxu.com/wordpress/2015/08/css-deep-understand-vertical-align-and-line-height/" target="_blank" rel="external">CSS深入理解vertical-align和line-height的基友关系</a>，终于找到了理论基础<a href="https://www.w3.org/TR/CSS21/visudet.html#propdef-vertical-align" target="_blank" rel="external">w3c可视化格式模型文档</a>：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The baseline <span class="keyword">of</span> <span class="keyword">an</span> <span class="string">'inline-block'</span> is <span class="keyword">the</span> baseline <span class="keyword">of</span> its <span class="keyword">last</span> <span class="built_in">line</span> box <span class="keyword">in</span> <span class="keyword">the</span> <span class="keyword">normal</span> flow, unless <span class="keyword">it</span> has either no <span class="keyword">in</span>-flow <span class="built_in">line</span> boxes <span class="keyword">or</span> <span class="keyword">if</span> its <span class="string">'overflow'</span> property has <span class="keyword">a</span> computed <span class="built_in">value</span> other than <span class="string">'visible'</span>, <span class="keyword">in</span> which <span class="keyword">case</span> <span class="keyword">the</span> baseline is <span class="keyword">the</span> bottom margin edge.</span><br></pre></td></tr></table></figure></p>
+<p>意思就是：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个inline-block元素，如果里面没有inline内联元素，或者<span class="attribute">overflow</span>不是visible，则该元素的基线就是其<span class="attribute">margin</span>底边缘，否则，其基线就是元素里面最后一行内联元素的基线</span><br></pre></td></tr></table></figure></p>
+<p>这就解释了本文中的两个inline-block元素无法对齐：<br>因为colorPicker的div里面没有inline内联元素，所以其基线就是margin底边缘。<br>但是我的icon div盒子里有一个i标签是inline内联元素，所以其基线是i标签内联元素的基线。</p>
+<p>zxx博客的这部分内容很好的复现了上述问题。<br><img src="exa.png" alt=""></p>
+<p>针对博客最后的那个例子我做了几个demo，和博客对比着看。</p>
+<ol>
+<li><p>通过那个规则，改变inline-block基线的位置，从而间距消除<br><img src="a.gif" alt=""></p>
+</li>
+<li><p>通过改变font-size使基线和中线重合<br><img src="b.gif" alt=""></p>
+</li>
+<li><p>通过改变vertical-align的规则，不要基线对齐。从而消除间距<br><img src="c.gif" alt=""></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/12/inline-block元素的诡异样式问题/" data-id="cjls7psir000mc6sgt7piak4z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/30/4xx/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">4xx</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pixhawk/">pixhawk</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protocal/">protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活，婚礼，朋友/">生活，婚礼，朋友</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科研/">科研</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodeJs-protocal/" style="font-size: 10px;">nodeJs,protocal</a> <a href="/tags/pixhawk/" style="font-size: 17.5px;">pixhawk</a> <a href="/tags/protocal/" style="font-size: 10px;">protocal</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/生活，婚礼，朋友/" style="font-size: 12.5px;">生活，婚礼，朋友</a> <a href="/tags/科研/" style="font-size: 12.5px;">科研</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <script src="/list-menu.js"></script>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 KenziD<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+       <p>Connect me by Rob10085@gmail.com</p>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

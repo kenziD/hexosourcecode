@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Scroll with Javascript VS CSS3 | kenziD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="实现点击button滑动到指定页面的特效。
+应用:
+
+点击导航栏滑动到指定的页面
+点击MORE就往下滑动一个页面
+点击回到顶部就滚回到首页">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scroll with Javascript VS CSS3">
+<meta property="og:url" content="http://yoursite.com/2015/10/02/scroll/index.html">
+<meta property="og:site_name" content="kenziD">
+<meta property="og:description" content="实现点击button滑动到指定页面的特效。
+应用:
+
+点击导航栏滑动到指定的页面
+点击MORE就往下滑动一个页面
+点击回到顶部就滚回到首页">
+<meta property="og:updated_time" content="2015-10-08T16:00:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scroll with Javascript VS CSS3">
+<meta name="twitter:description" content="实现点击button滑动到指定页面的特效。
+应用:
+
+点击导航栏滑动到指定的页面
+点击MORE就往下滑动一个页面
+点击回到顶部就滚回到首页">
+  
+    <link rel="alternative" href="/atom.xml" title="kenziD" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kenziD</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A Girl Who Love Programming</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-scroll" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/02/scroll/" class="article-date">
+  <time datetime="2015-10-01T16:43:04.000Z" itemprop="datePublished">2015-10-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Scroll with Javascript VS CSS3
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>实现点击button滑动到指定页面的特效。</p>
+<p>应用:</p>
+<ul>
+<li>点击导航栏滑动到指定的页面</li>
+<li>点击MORE就往下滑动一个页面</li>
+<li>点击<em>回到顶部</em>就滚回到首页</li>
+</ul>
+<a id="more"></a>
+<p>这里分别用</p>
+<ul>
+<li><p>Javascript：</p>
+<ul>
+<li><p>window.scrollBy()控制滚动条实现<br><a href="https://jsfiddle.net/g1760uno/" target="_blank" rel="external">代码+Demo</a></p>
+<blockquote>
+<p>缺点：感觉不够顺滑流畅且没有动画特效<br>如果有大背景图片，就不够流畅了。更别提fixed。</p>
+</blockquote>
+</li>
+<li><p>Jquery库里的.animate实现<br><a href="https://jsfiddle.net/yugko0c6/" target="_blank" rel="external">代码+Demo</a></p>
+<blockquote>
+<p>优点：相对顺滑流畅 且有动画特效<br>缺点：如果有大背景图片，就不够流畅了。更别提fixed。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>CSS3里的transition：<br><a href="https://jsfiddle.net/wk7e4zep/" target="_blank" rel="external">代码+Demo</a></p>
+<blockquote>
+<p>优点：非常顺滑流畅！有动画特效。即使是有大背景图片。<br>缺点：滚动条失效。因为是使用tranlateY使其整体上移下移，和滚动条无关。当 然也就无法实现fixed效果<br>其实这里的实现方法，感觉不完美。<br>代码中多写了两个id分别为page_1和page_2的div，来对应a标签中的href，只是为了能在触发target的时候，能让后面的所有为wrap类的容器一起执行transform这样page1与page2才不会断层。<br>我认为更好的解决方式是，不要另起id名，直接就用page1 page2,然后在<br>article外面套一个#main的div，触发page1和page2时能选择父元素#main使其整体上升下降。但是CSS3里貌似没有父级元素选择器，有了貌似浏览器也米有支持。具体可以google.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="3种实现方式一起比较:Demo">3种实现方式一起比较:<a href="https://jsfiddle.net/a4aoshp9/" target="_blank" rel="external">Demo</a></h2><p>这里再记录一下关于Javascript里的原生onclick()和JQuery里的.click(funtciton(){}).我的代码里都用的是onclick，不过对比会发现，使用.click更流畅，具体比较请看：<a href="http://stackoverflow.com/questions/12627443/jquery-click-vs-onclick" target="_blank" rel="external">jQuery.click() vs onClick</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/02/scroll/" data-id="cjls7psjt001hc6sgl8mgkck2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/03/hexo-diy/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hexo-DIY
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/19/css-learning/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">css button host style</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pixhawk/">pixhawk</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protocal/">protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活，婚礼，朋友/">生活，婚礼，朋友</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科研/">科研</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodeJs-protocal/" style="font-size: 10px;">nodeJs,protocal</a> <a href="/tags/pixhawk/" style="font-size: 17.5px;">pixhawk</a> <a href="/tags/protocal/" style="font-size: 10px;">protocal</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/生活，婚礼，朋友/" style="font-size: 12.5px;">生活，婚礼，朋友</a> <a href="/tags/科研/" style="font-size: 12.5px;">科研</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <script src="/list-menu.js"></script>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 KenziD<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+       <p>Connect me by Rob10085@gmail.com</p>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

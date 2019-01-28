@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>字符串编码 | kenziD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前对url进行编码的时候遇到过encodeURI和encodeURIComponent，如今要设置cookie的value又遇到了escape()，并且提示说，尽量不用这个方法。
+
+那么这些方法有什么区别呢？
+escape首先这个方法被不推荐使用。如上图所示。
+它不会对ASCII字母 数字  * @ - _ + . /这些符号进行转义。
+下面这张table表示了escape方法对哪些字符进行编码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串编码">
+<meta property="og:url" content="http://yoursite.com/2016/05/17/字符串编码/index.html">
+<meta property="og:site_name" content="kenziD">
+<meta property="og:description" content="之前对url进行编码的时候遇到过encodeURI和encodeURIComponent，如今要设置cookie的value又遇到了escape()，并且提示说，尽量不用这个方法。
+
+那么这些方法有什么区别呢？
+escape首先这个方法被不推荐使用。如上图所示。
+它不会对ASCII字母 数字  * @ - _ + . /这些符号进行转义。
+下面这张table表示了escape方法对哪些字符进行编码">
+<meta property="og:image" content="http://yoursite.com/img/escape.png">
+<meta property="og:image" content="http://yoursite.com/img/escape-encode.png">
+<meta property="og:image" content="http://yoursite.com/img/escape-noencode.png">
+<meta property="og:image" content="http://yoursite.com/img/encodeURI-encode.png">
+<meta property="og:image" content="http://yoursite.com/img/encodeURI-noencode.png">
+<meta property="og:image" content="http://yoursite.com/img/encodeURIComponent-encode.png">
+<meta property="og:image" content="http://yoursite.com/img/encodeURIComponent-noencode.png">
+<meta property="og:updated_time" content="2016-05-17T11:49:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="字符串编码">
+<meta name="twitter:description" content="之前对url进行编码的时候遇到过encodeURI和encodeURIComponent，如今要设置cookie的value又遇到了escape()，并且提示说，尽量不用这个方法。
+
+那么这些方法有什么区别呢？
+escape首先这个方法被不推荐使用。如上图所示。
+它不会对ASCII字母 数字  * @ - _ + . /这些符号进行转义。
+下面这张table表示了escape方法对哪些字符进行编码">
+<meta name="twitter:image" content="http://yoursite.com/img/escape.png">
+  
+    <link rel="alternative" href="/atom.xml" title="kenziD" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kenziD</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A Girl Who Love Programming</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-字符串编码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/17/字符串编码/" class="article-date">
+  <time datetime="2016-05-17T05:34:14.000Z" itemprop="datePublished">2016-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      字符串编码
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前对url进行编码的时候遇到过encodeURI和encodeURIComponent，如今要设置cookie的value又遇到了escape()，并且提示说，尽量不用这个方法。</p>
+<p><img src="img/escape.png" alt=""></p>
+<p>那么这些方法有什么区别呢？</p>
+<h3 id="escape">escape</h3><p>首先这个方法被不推荐使用。如上图所示。</p>
+<p>它不会对ASCII字母 数字  * @ - _ + . /这些符号进行转义。</p>
+<p>下面这张table表示了escape方法对哪些字符进行编码：<br><img src="img/escape-encode.png" alt=""><br>下面这张table表示了escape方法对哪些字符不进行编码：<br><img src="img/escape-noencode.png" alt=""></p>
+<h3 id="encodeURI">encodeURI</h3><p>下面内容部分来自于知乎答案：<a href="https://www.zhihu.com/question/21861899/answer/20300871" target="_blank" rel="external">黄家兴的回答</a></p>
+<p>他用来对完整的url编码。它不会对：ASCII字母 数字 ~ ! @ # $ &amp; * ( ) = : / , ; ? + ‘ 这些符号进行转义。</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">encodeURI(<span class="string">"http://www.cnblogs.com/season-huang/some other thing"</span>);</span><br><span class="line"></span><br><span class="line">//<span class="literal">result</span></span><br><span class="line"><span class="string">"http://www.cnblogs.com/season-huang/some%20other%20thing"</span>;</span><br></pre></td></tr></table></figure>
+<p>其中，空格被编码成了%20。但是如果你用了encodeURIComponent，那么结果变为<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"http%3A%2F%2Fwww.cnblogs.com%2Fseason-huang%2Fsome%20other%20thing"</span></span><br></pre></td></tr></table></figure></p>
+<p>看到了区别吗，连 “/“ 都被编码了，整个URL已经没法用了。</p>
+<p>下面这张table表示了encodeURI方法对哪些字符进行编码：<br><img src="img/encodeURI-encode.png" alt=""><br>下面这张table表示了encodeURI方法对哪些字符不进行编码：<br><img src="img/encodeURI-noencode.png" alt=""></p>
+<h3 id="encodeURIComponent">encodeURIComponent</h3><p>他用来对url的部分query参数进行编码。它不会对ASCII字母 数字 ~ ! * ( ) ‘这些符号进行转义。</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> param = <span class="string">"http://www.cnblogs.com/season-huang/"</span>; <span class="comment">//param为参数</span></span><br><span class="line">param = <span class="built_in">encodeURIComponent</span>(param);</span><br><span class="line"><span class="built_in">var</span> <span class="built_in">url</span> = <span class="string">"http://www.cnblogs.com?next="</span> + param;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">url</span>) <span class="comment">//"http://www.cnblogs.com?next=http%3A%2F%2Fwww.cnblogs.com%2Fseason-huang%2F"</span></span><br></pre></td></tr></table></figure>
+<p>下面这张table表示了encodeURIComponent方法对哪些字符进行编码：<br><img src="img/encodeURIComponent-encode.png" alt=""></p>
+<p>下面这张table表示了encodeURIComponent方法对哪些字符不进行编码：<br><img src="img/encodeURIComponent-noencode.png" alt=""></p>
+<h3 id="总结">总结</h3><p>escape不推荐使用</p>
+<p>encodeURIComponent会毁掉整个url，他只适用于当一个url是另一个url的参数时，对其进行编码</p>
+<p>encodeURI可以对完整的url进行编码。</p>
+<h3 id="题外话">题外话</h3><p>这些数据是我用一下代码生成的：</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> arr1 = [];</span><br><span class="line"><span class="built_in">var</span> arr2 = [];</span><br><span class="line"><span class="built_in">var</span> arr3 = [];</span><br><span class="line"><span class="built_in">var</span> arr4 = [];</span><br><span class="line"><span class="built_in">var</span> arr5 = [];</span><br><span class="line"><span class="built_in">var</span> arr6 = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">var</span> i = <span class="number">0</span>; i &lt; <span class="number">127</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">var</span> char = <span class="built_in">String</span>.fromCharCode(i);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">encodeURI</span>(char) == char) &#123;</span><br><span class="line">        arr1.push(&#123;</span><br><span class="line">            <span class="attribute">charcode</span>: i,</span><br><span class="line">            <span class="attribute">character</span>: char,</span><br><span class="line">            <span class="attribute">encodeURI</span>: <span class="built_in">encodeURI</span>(char),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">encodeURI</span>(char) !== char) &#123;</span><br><span class="line">        arr2.push(&#123;</span><br><span class="line">            <span class="attribute">charcode</span>: i,</span><br><span class="line">            <span class="attribute">character</span>: char,</span><br><span class="line">            <span class="attribute">encodeURI</span>: <span class="built_in">encodeURI</span>(char),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">escape</span>(char) == char) &#123;</span><br><span class="line">        arr3.push(&#123;</span><br><span class="line">            <span class="attribute">charcode</span>: i,</span><br><span class="line">            <span class="attribute">character</span>: char,</span><br><span class="line">            <span class="attribute">escape</span>: <span class="built_in">escape</span>(char),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">escape</span>(char) !== char) &#123;</span><br><span class="line">        arr4.push(&#123;</span><br><span class="line">            <span class="attribute">charcode</span>: i,</span><br><span class="line">            <span class="attribute">character</span>: char,</span><br><span class="line">            <span class="attribute">escape</span>: <span class="built_in">escape</span>(char),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">encodeURIComponent</span>(char) == char) &#123;</span><br><span class="line">        arr5.push(&#123;</span><br><span class="line">            <span class="attribute">charcode</span>: i,</span><br><span class="line">            <span class="attribute">character</span>: char,</span><br><span class="line">            <span class="attribute">encodeURIComponent</span>: <span class="built_in">encodeURIComponent</span>(char),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">encodeURIComponent</span>(char) !== char) &#123;</span><br><span class="line">        arr6.push(&#123;</span><br><span class="line">            <span class="attribute">charcode</span>: i,</span><br><span class="line">            <span class="attribute">character</span>: char,</span><br><span class="line">            <span class="attribute">encodeURIComponent</span>: <span class="built_in">encodeURIComponent</span>(char),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后用console.table(arr1)就可以在控制台打印了。</p>
+<p>然而console.table这么方便有木有可以直接把array转成table的api，直接显示在网页上？上网找了一下貌似不太可心。而且这么基础的程序我希望能用原生js实现。so，做了个轮子，把array转成table。基本实现了console.table的用法。<a href="https://github.com/kenziD/arrayToTable" target="_blank" rel="external">传送门</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/17/字符串编码/" data-id="cjls7pskc001rc6sg9h13e470" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/22/nodeJsSimpleServer/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          nodeJsSimpleServer
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/14/http/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">http协议学习笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pixhawk/">pixhawk</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protocal/">protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活，婚礼，朋友/">生活，婚礼，朋友</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科研/">科研</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodeJs-protocal/" style="font-size: 10px;">nodeJs,protocal</a> <a href="/tags/pixhawk/" style="font-size: 17.5px;">pixhawk</a> <a href="/tags/protocal/" style="font-size: 10px;">protocal</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/生活，婚礼，朋友/" style="font-size: 12.5px;">生活，婚礼，朋友</a> <a href="/tags/科研/" style="font-size: 12.5px;">科研</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <script src="/list-menu.js"></script>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 KenziD<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+       <p>Connect me by Rob10085@gmail.com</p>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

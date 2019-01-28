@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>科研报告2 | kenziD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="FLY 竹蜻蜓
+2015-09-05今天找出了之前的一个bug，把遥控器的NRF24L01和小飞机的NRF24L01模块调通了。
+问题原因：
+
+把NRF24L01_Check()检测NRF24L01是否在位的程序放在了NRF24L01_TX_Mode()设置为发送模式之后。
+
+问题分析：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="科研报告2">
+<meta property="og:url" content="http://yoursite.com/2015/09/06/report-2015-09-06/index.html">
+<meta property="og:site_name" content="kenziD">
+<meta property="og:description" content="FLY 竹蜻蜓
+2015-09-05今天找出了之前的一个bug，把遥控器的NRF24L01和小飞机的NRF24L01模块调通了。
+问题原因：
+
+把NRF24L01_Check()检测NRF24L01是否在位的程序放在了NRF24L01_TX_Mode()设置为发送模式之后。
+
+问题分析：">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/warning.png">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/elseif.png">
+<meta property="og:updated_time" content="2015-10-08T16:00:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="科研报告2">
+<meta name="twitter:description" content="FLY 竹蜻蜓
+2015-09-05今天找出了之前的一个bug，把遥控器的NRF24L01和小飞机的NRF24L01模块调通了。
+问题原因：
+
+把NRF24L01_Check()检测NRF24L01是否在位的程序放在了NRF24L01_TX_Mode()设置为发送模式之后。
+
+问题分析：">
+<meta name="twitter:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/warning.png">
+  
+    <link rel="alternative" href="/atom.xml" title="kenziD" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kenziD</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A Girl Who Love Programming</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-report-2015-09-06" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/06/report-2015-09-06/" class="article-date">
+  <time datetime="2015-09-06T03:02:09.000Z" itemprop="datePublished">2015-09-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      科研报告2
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="FLY_竹蜻蜓">FLY 竹蜻蜓</h4><hr>
+<h2 id="2015-09-05">2015-09-05</h2><p>今天找出了之前的一个bug，把遥控器的NRF24L01和小飞机的NRF24L01模块调通了。</p>
+<p>问题原因：</p>
+<blockquote>
+<p>把NRF24L01_Check()检测NRF24L01是否在位的程序放在了NRF24L01_TX_Mode()设置为发送模式之后。</p>
+</blockquote>
+<p>问题分析：</p>
+<a id="more"></a>
+<ul>
+<li>NRF24L01_Check() 代码：</li>
+</ul>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">u8 NRF24L01_Check(void)</span><br><span class="line">&#123;</span><br><span class="line">    u8 buf[<span class="number">5</span>] = &#123;<span class="number">0</span>XA5, <span class="number">0</span>XA5, <span class="number">0</span>XA5, <span class="number">0</span>XA5, <span class="number">0</span>XA5&#125;<span class="comment">;</span></span><br><span class="line">    u8 i<span class="comment">;</span></span><br><span class="line">    SPI2_SetSpeed(SPI_BaudRatePrescaler_4)<span class="comment">; </span></span><br><span class="line">    NRF24L01_Write_Buf(WRITE_REG_NRF + TX_ADDR, buf, <span class="number">5</span>)<span class="comment">;//这里设置发送地址为0XA5 </span></span><br><span class="line">    NRF24L01_Read_Buf(TX_ADDR, buf, <span class="number">5</span>)<span class="comment">; </span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span><span class="comment">; i &lt; 5; i++)if (buf[i] != 0XA5)break;</span></span><br><span class="line">    <span class="keyword">if</span> (i != <span class="number">5</span>)<span class="keyword">return</span> <span class="number">1</span><span class="comment">; </span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span><span class="comment">;        </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>NRF24L01_TX_Mode()</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const u8 TX_ADDRESS[TX_ADR_WIDTH] = &#123;<span class="number">0x34</span>, <span class="number">0x43</span>, <span class="number">0x10</span>, <span class="number">0x10</span>, <span class="number">0x01</span>&#125;<span class="comment">; //发送地址</span></span><br><span class="line">const u8 RX_ADDRESS[RX_ADR_WIDTH] = &#123;<span class="number">0x34</span>, <span class="number">0x43</span>, <span class="number">0x10</span>, <span class="number">0x10</span>, <span class="number">0x01</span>&#125;<span class="comment">; //发送地址</span></span><br><span class="line">void NRF24L01_TX_Mode(void)</span><br><span class="line">&#123;</span><br><span class="line">    NRF24L01_CE = <span class="number">0</span><span class="comment">;</span></span><br><span class="line">    NRF24L01_Write_Buf(WRITE_REG_NRF + TX_ADDR, (u8*)TX_ADDRESS, TX_ADR_WIDTH)<span class="comment">;//这里设置发送地址为正确的地址。只有发送地址和接收地址相配对，才能通信成功。 </span></span><br><span class="line">    NRF24L01_Write_Buf(WRITE_REG_NRF + RX_ADDR_P0, (u8*)RX_ADDRESS, RX_ADR_WIDTH)<span class="comment">; </span></span><br><span class="line">    NRF24L01_Write_Reg(WRITE_REG_NRF + EN_AA, <span class="number">0x01</span>)<span class="comment">;  </span></span><br><span class="line">    NRF24L01_Write_Reg(WRITE_REG_NRF + EN_RXADDR, <span class="number">0x01</span>)<span class="comment">; </span></span><br><span class="line">    NRF24L01_Write_Reg(WRITE_REG_NRF + SETUP_RETR, <span class="number">0x1a</span>)<span class="comment">; </span></span><br><span class="line">    NRF24L01_Write_Reg(WRITE_REG_NRF + RF_CH, <span class="number">40</span>)<span class="comment">;    </span></span><br><span class="line">    NRF24L01_Write_Reg(WRITE_REG_NRF + RF_SETUP, <span class="number">0x0f</span>)<span class="comment">; </span></span><br><span class="line">    NRF24L01_Write_Reg(WRITE_REG_NRF + <span class="built_in">CONFIG</span>, <span class="number">0x0e</span>)<span class="comment">; </span></span><br><span class="line">    NRF24L01_CE = <span class="number">1</span><span class="comment">; </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>正确的主函数</li>
+</ul>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (NRF24L01_Check())<span class="comment">//如果这句放在设置发送模式的后面，就会把用来测试的发送地址设为真正的发送地址，覆盖掉正确的发送地址。从而导致通信失败。    </span></span><br><span class="line">&#123;</span><br><span class="line">    LED2_ON<span class="comment">;</span></span><br><span class="line">    LED1_OFF<span class="comment">;</span></span><br><span class="line">    printf(<span class="string">"no"</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line">NRF24L01_TX_Mode()<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2015-09-08">2015-09-08</h2><p>今天遭遇了一个神奇的bug：</p>
+<p>一个简单的按键扫描程序，就俩键。</p>
+<p>逻辑是：</p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">u8 key_scan(void)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(有键按下：按键<span class="number">1</span>按下||按键<span class="number">2</span>按下)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(按键<span class="number">1</span>按下)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span><span class="comment">;</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(按键<span class="number">2</span>按下)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span><span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span><span class="comment">//无键按下</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在主程序中：</p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">key = key_scan()<span class="comment">;</span></span><br><span class="line"><span class="keyword">if</span>(key == <span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">do</span> a<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(key == <span class="number">2</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">do</span> b<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>表面上看没错误，实际有一个很明显的漏洞：当if……else if…… 不包括所有的条件在内，也就是说有可能会出现条件不符合if(……），也不符合else if(……）的情况，这时候函数就不知道该返回什么值了。就隐藏了一个潜在的无用返回值，很有可能影响正常的程序。比如这个无用返回值是1，这样主程序会误认为按下了按键1，执行了a。</p>
+<p>事实也确实是如此：<br><img src="http://7xk7fp.com1.z0.glb.clouddn.com/warning.png" alt="warning"><br>它有一个无返回值的警告。然而我没在意，但程序运行时出现这样的情况：</p>
+<p>实例描述：<br>按键扫描函数：<br><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">u8 KEY_scan(void)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(MODE_KEY==<span class="number">0</span>||FUN_KEY==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        delay_ms(<span class="number">10</span>)<span class="comment">;</span></span><br><span class="line">        <span class="keyword">if</span>(MODE_KEY==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span><span class="comment">;</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(FUN_KEY==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span><span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>主函数：<br><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MODE_KEY_DOWN <span class="number">1</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FUN_KEY_DOWN <span class="number">2</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        key = KEY_scan()<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(key&gt;<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (key==MODE_KEY_DOWN)<span class="comment">//按下MODE键</span></span><br><span class="line">            &#123;</span><br><span class="line">                printf(<span class="string">"MODE_KEY\n"</span>)<span class="comment">;//打印MODE_KEY</span></span><br><span class="line">                key=<span class="number">0</span><span class="comment">;</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (key==FUN_KEY_DOWN)<span class="comment">//按下FUN键</span></span><br><span class="line">            &#123;</span><br><span class="line">                printf(<span class="string">"FUN_KEY\n"</span>)<span class="comment">;//打印FUN_KEY</span></span><br><span class="line">                key=<span class="number">0</span><span class="comment">;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://7xk7fp.com1.z0.glb.clouddn.com/elseif.png" alt="end1"></p>
+<blockquote>
+<p>运行结果：<br>当我按下FUN键后，会莫名出现一个MODE键按下的对应打印。<br>debug发现，当按下FUN键后，key值变为2，当松开的一瞬间，突然有一个key=1的值出现，导致程序执行了打印MODE_KEY，但是程序并没有执行到if(MODE_KEY==0)这句判断语句内，但还是返回了一个1值。这个就是垃圾返回值。</p>
+</blockquote>
+<p>把程序修改成了:<br><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">u8 KEY_scan(void)</span><br><span class="line">&#123;</span><br><span class="line">    static u8 key_up = <span class="number">0</span><span class="comment">;   </span></span><br><span class="line">    <span class="keyword">if</span>(MODE_KEY==<span class="number">0</span>||FUN_KEY==<span class="number">0</span>)</span><br><span class="line">    &#123;       </span><br><span class="line">        delay_ms(<span class="number">10</span>)<span class="comment">;</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(MODE_KEY==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span><span class="comment">;</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(FUN_KEY==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span><span class="comment">;</span></span><br><span class="line">        <span class="keyword">else</span> <span class="comment">//补全了情况</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">3</span><span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>后运行正常，也没有警告。</p>
+<p>经过右上角男士提点：尽量少用else。程序修改成如下：<br><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">u8 KEY_scan(void)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(MODE_KEY==<span class="number">0</span>||FUN_KEY==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        delay_ms(<span class="number">100</span>)<span class="comment">;</span></span><br><span class="line">        <span class="keyword">if</span>(MODE_KEY==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span><span class="comment">;</span></span><br><span class="line">        <span class="keyword">if</span>(FUN_KEY==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span><span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>也没啥问题。</p>
+<h2 id="2015-09-15">2015-09-15</h2><p>NRF24L01莫名其妙的又不通信了。痛心啊。还以为是硬件问题。因为软件都是复制的啊（PS：好像一直都是我找不出bug的理由^0^）<br>最后发现一直精简程序，想把进程都放在中断里执行。即时间片轮转算法里的时间片。</p>
+<p>最后发现只顾着把修改发送字节却忘记了执行发送这重要的一步。</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if (<span class="name">NRF24L01_TxPacket</span>(<span class="name">tmp_buf</span>) == TX_OK)</span><br></pre></td></tr></table></figure>
+<p>一眼看上去感觉只是一个判断发送是否完成的语句语句，但实际上发送函数也在里面。哎。脑子估计抽筋了。</p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//启动NRF24L01发送一次数据</span></span><br><span class="line"><span class="comment">//txbuf:待发送数据首地址</span></span><br><span class="line"><span class="comment">//返回值:发送完成状况</span></span><br><span class="line">u8 NRF24L01_TxPacket(u8 *txbuf)</span><br><span class="line">&#123;</span><br><span class="line">	u8 sta<span class="comment">;</span></span><br><span class="line">	SPI2_SetSpeed(SPI_BaudRatePrescaler_4)<span class="comment">;//spi速度为9Mhz（24L01的最大SPI时钟为10Mhz）</span></span><br><span class="line">	NRF24L01_CE = <span class="number">0</span><span class="comment">;</span></span><br><span class="line">	NRF24L01_Write_Buf(WR_TX_PLOAD, txbuf, TX_PLOAD_WIDTH)<span class="comment">; //写数据到TX BUF  5个字节</span></span><br><span class="line">	NRF24L01_CE = <span class="number">1</span><span class="comment">; //启动发送</span></span><br><span class="line">	<span class="keyword">while</span> (NRF24L01_IRQ != <span class="number">0</span>)<span class="comment">; //等待发送完成</span></span><br><span class="line">	sta = NRF24L01_Read_Reg(STATUS)<span class="comment">; //读取状态寄存器的值</span></span><br><span class="line">	NRF24L01_Write_Reg(WRITE_REG_NRF + STATUS, sta)<span class="comment">; //清除TX_DS或MAX_RT中断标志</span></span><br><span class="line">	<span class="keyword">if</span> (sta &amp; MAX_TX) <span class="comment">//达到最大重发次数</span></span><br><span class="line">	&#123;</span><br><span class="line">		NRF24L01_Write_Reg(FLUSH_TX, <span class="number">0</span>xff)<span class="comment">; //清除TX FIFO寄存器</span></span><br><span class="line">		<span class="keyword">return</span> MAX_TX<span class="comment">;</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (sta &amp; TX_OK) <span class="comment">//发送完成</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> TX_OK<span class="comment">;</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>xff<span class="comment">;//其他原因发送失败</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/06/report-2015-09-06/" data-id="cjls7psjr001ec6sggcpk2uus" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/科研/">科研</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/19/css-learning/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          css button host style
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/18/write/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">科研报告</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pixhawk/">pixhawk</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protocal/">protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活，婚礼，朋友/">生活，婚礼，朋友</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科研/">科研</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodeJs-protocal/" style="font-size: 10px;">nodeJs,protocal</a> <a href="/tags/pixhawk/" style="font-size: 17.5px;">pixhawk</a> <a href="/tags/protocal/" style="font-size: 10px;">protocal</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/生活，婚礼，朋友/" style="font-size: 12.5px;">生活，婚礼，朋友</a> <a href="/tags/科研/" style="font-size: 12.5px;">科研</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <script src="/list-menu.js"></script>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 KenziD<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+       <p>Connect me by Rob10085@gmail.com</p>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

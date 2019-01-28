@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>min-height:100% | kenziD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="quick learn form here
+如果想要子元素页面100%父元素要设为height:100%,子元素设为min-height:100%.当然也可以子元素设为height:100%,不过这样高度就不会随着内容的增多而被撑高。
+如果父元素高度也是min-height:100%,子元素也设置为min-height:100%,子没办法是真正的满屏。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="min-height:100%">
+<meta property="og:url" content="http://yoursite.com/2015/10/08/min-height-1/index.html">
+<meta property="og:site_name" content="kenziD">
+<meta property="og:description" content="quick learn form here
+如果想要子元素页面100%父元素要设为height:100%,子元素设为min-height:100%.当然也可以子元素设为height:100%,不过这样高度就不会随着内容的增多而被撑高。
+如果父元素高度也是min-height:100%,子元素也设置为min-height:100%,子没办法是真正的满屏。">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/min-height.png">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/height.png">
+<meta property="og:updated_time" content="2015-10-08T16:00:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="min-height:100%">
+<meta name="twitter:description" content="quick learn form here
+如果想要子元素页面100%父元素要设为height:100%,子元素设为min-height:100%.当然也可以子元素设为height:100%,不过这样高度就不会随着内容的增多而被撑高。
+如果父元素高度也是min-height:100%,子元素也设置为min-height:100%,子没办法是真正的满屏。">
+<meta name="twitter:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/min-height.png">
+  
+    <link rel="alternative" href="/atom.xml" title="kenziD" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kenziD</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A Girl Who Love Programming</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-min-height-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/08/min-height-1/" class="article-date">
+  <time datetime="2015-10-08T15:05:10.000Z" itemprop="datePublished">2015-10-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      min-height:100%
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.tutwow.com/htmlcss/quick-tip-css-100-height/" target="_blank" rel="external">quick learn form here</a></p>
+<p>如果想要子元素页面100%<br>父元素要设为height:100%,子元素设为min-height:100%.当然也可以子元素设为height:100%,不过这样高度就不会随着内容的增多而被撑高。</p>
+<p>如果父元素高度也是min-height:100%,子元素也设置为min-height:100%,子没办法是真正的满屏。</p>
+<a id="more"></a>
+<blockquote>
+<p>Incidentally, the reason why you have to specify height and min-height to html and body respectively is because neither element has any intrinsic height. <strong>Both are height: auto by default.</strong> It is the viewport that has 100% height, so height: 100% is taken from the viewport, then applied to body as a minimum to allow for scrolling of content.</p>
+<p>using min-height: 100% on both, doesn’t cause #child to expand to the full height of #father because min-height with a percentage doesn’t work on #child unless #father has an explicit height.</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>ppt<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css"></span><br><span class="line">            <span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;</span><br><span class="line">                <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">                <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">                <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">                <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">                <span class="attribute">background</span>: red;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="selector-id">#father</span> &#123;</span><br><span class="line">                <span class="attribute">min-width</span>: <span class="number">100%</span>;</span><br><span class="line">                <span class="attribute">min-height</span>: <span class="number">100%</span>;</span><br><span class="line">                <span class="attribute">background</span>: <span class="number">#AEEEEE</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="selector-id">#child</span> &#123;</span><br><span class="line">                <span class="attribute">min-height</span>: <span class="number">100%</span>;</span><br><span class="line">                <span class="attribute">min-width</span>: <span class="number">100%</span>;</span><br><span class="line">                <span class="attribute">background</span>:<span class="number">#FFC0CB</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"father"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"child"</span>&gt;</span></span><br><span class="line">                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis beatae quasi ipsum nihil perferendis rerum ex sit, asperiores officia totam eveniet magnam, repellat animi unde commodi, perspiciatis obcaecati cupiditate tempora.</span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://7xk7fp.com1.z0.glb.clouddn.com/min-height.png" alt="father:min-height:100%"></p>
+<p>如果把father的min-height改为height:100%，child就可以满屏啦。</p>
+<p>效果如图：</p>
+<p><img src="http://7xk7fp.com1.z0.glb.clouddn.com/height.png" alt="father:min-height:100%"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/08/min-height-1/" data-id="cjls7psj3000uc6sgn91qyzur" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/12/list-menu/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          制作input下拉菜单
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/05/gif/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Icon Slide from the Center to Side</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pixhawk/">pixhawk</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protocal/">protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活，婚礼，朋友/">生活，婚礼，朋友</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科研/">科研</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodeJs-protocal/" style="font-size: 10px;">nodeJs,protocal</a> <a href="/tags/pixhawk/" style="font-size: 17.5px;">pixhawk</a> <a href="/tags/protocal/" style="font-size: 10px;">protocal</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/生活，婚礼，朋友/" style="font-size: 12.5px;">生活，婚礼，朋友</a> <a href="/tags/科研/" style="font-size: 12.5px;">科研</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <script src="/list-menu.js"></script>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 KenziD<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+       <p>Connect me by Rob10085@gmail.com</p>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

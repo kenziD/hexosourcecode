@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>纯CSS3制作动态饼状图 | kenziD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Demo刚开始在想如何画圆环，想着用两个Div嵌套，还一直研究如何使圆心居中，实际上就是如何是子div垂直水平居中，也算误打误撞学了一下知识。
+看了教程才意识到只需一个div设置一下边框宽度就可以画出圆环了。
+html:1&amp;lt;div class=&quot;circle&quot;&amp;gt;&amp;lt;/div&amp;gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="纯CSS3制作动态饼状图">
+<meta property="og:url" content="http://yoursite.com/2015/10/19/circle/index.html">
+<meta property="og:site_name" content="kenziD">
+<meta property="og:description" content="Demo刚开始在想如何画圆环，想着用两个Div嵌套，还一直研究如何使圆心居中，实际上就是如何是子div垂直水平居中，也算误打误撞学了一下知识。
+看了教程才意识到只需一个div设置一下边框宽度就可以画出圆环了。
+html:1&amp;lt;div class=&quot;circle&quot;&amp;gt;&amp;lt;/div&amp;gt;">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/half-circle.png">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/radius-1.png">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/radius-2.png">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/deg.png">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/a.gif">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/circle2.png">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/circle3.png">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/final.gif">
+<meta property="og:updated_time" content="2015-10-20T04:12:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="纯CSS3制作动态饼状图">
+<meta name="twitter:description" content="Demo刚开始在想如何画圆环，想着用两个Div嵌套，还一直研究如何使圆心居中，实际上就是如何是子div垂直水平居中，也算误打误撞学了一下知识。
+看了教程才意识到只需一个div设置一下边框宽度就可以画出圆环了。
+html:1&amp;lt;div class=&quot;circle&quot;&amp;gt;&amp;lt;/div&amp;gt;">
+<meta name="twitter:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/half-circle.png">
+  
+    <link rel="alternative" href="/atom.xml" title="kenziD" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kenziD</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A Girl Who Love Programming</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-circle" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/19/circle/" class="article-date">
+  <time datetime="2015-10-19T09:34:12.000Z" itemprop="datePublished">2015-10-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      纯CSS3制作动态饼状图
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Demo"><a href="http://jsfiddle.net/0m20xaLx/1/" target="_blank" rel="external">Demo</a></h1><p>刚开始在想如何画圆环，想着用两个Div嵌套，还一直研究如何使圆心居中，实际上就是如何是子div垂直水平居中，也算误打误撞学了一下知识。</p>
+<p>看了教程才意识到只需一个div设置一下边框宽度就可以画出圆环了。</p>
+<p>html:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"circle"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>首先利用:before要画一个半圆:</p>
+<p><img src="http://7xk7fp.com1.z0.glb.clouddn.com/half-circle.png" alt=""></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.circle</span><span class="selector-pseudo">:before</span>&#123;</span><br><span class="line">			<span class="attribute">box-sizing</span>:border-box;</span><br><span class="line">			<span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">			<span class="attribute">position</span>: absolute;</span><br><span class="line">			<span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">			<span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">			<span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">			<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">			<span class="attribute">border-radius</span>: <span class="number">50px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">50px</span>;<span class="comment">/*画半圆*/</span></span><br><span class="line">			<span class="attribute">background</span>:<span class="number">#0cf</span>;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<p>画半圆的关键是设置border-radius的大小和宽一致,以及宽度是高度的一半。<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">border-radius</span>: <span class="number">20px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">20px</span>;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://7xk7fp.com1.z0.glb.clouddn.com/radius-1.png" alt=""></p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">border-radius</span>: <span class="number">30px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">30px</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xk7fp.com1.z0.glb.clouddn.com/radius-2.png" alt=""></p>
+<p>利用div本身的遮罩实现0度到180度的变换：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.circle</span>&#123;</span><br><span class="line">			<span class="attribute">box-sizing</span>:border-box;</span><br><span class="line">			<span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">			<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">			<span class="attribute">background</span>:<span class="built_in">rgba</span>(0,0,0,0.2);<span class="comment">/*为了看清楚，先随意设一个颜色*/</span></span><br><span class="line">			<span class="attribute">position</span>: relative;</span><br><span class="line">	&#125;</span><br><span class="line">		<span class="selector-class">.circle</span><span class="selector-pseudo">:before</span>&#123;</span><br><span class="line">			<span class="attribute">box-sizing</span>:border-box;</span><br><span class="line">			<span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">			<span class="attribute">position</span>: absolute;</span><br><span class="line">			<span class="attribute">z-index</span>: -<span class="number">1</span>;<span class="comment">/*遮罩应该位于圆的上层，覆盖掉圆*/</span></span><br><span class="line">			<span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">			<span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">			<span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">			<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">			<span class="attribute">border-radius</span>: <span class="number">50px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">50px</span>;</span><br><span class="line">			<span class="attribute">background</span>:<span class="number">#0cf</span>;</span><br><span class="line">			<span class="attribute">transform</span>:<span class="built_in">rotate</span>(30deg);<span class="comment">/*旋转30度*/</span></span><br><span class="line">			<span class="attribute">transform-origin</span>:<span class="number">50px</span> <span class="number">50px</span>;<span class="comment">/*旋转的圆心的位置应该位于直径的中点*/</span></span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xk7fp.com1.z0.glb.clouddn.com/deg.png" alt=""><br>如果动态改变角度，就可以实现：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.circle</span><span class="selector-pseudo">:before</span>&#123;</span><br><span class="line">			<span class="attribute">box-sizing</span>:border-box;</span><br><span class="line">			<span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">			<span class="attribute">position</span>: absolute;</span><br><span class="line">			<span class="attribute">z-index</span>: -<span class="number">1</span>;<span class="comment">/*遮罩应该位于园的上层，覆盖掉园*/</span></span><br><span class="line">			<span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">			<span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">			<span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">			<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">			<span class="attribute">background</span>:<span class="number">#0cf</span>;</span><br><span class="line">			<span class="attribute">transform</span>:<span class="built_in">rotate</span>(0deg);</span><br><span class="line">			<span class="attribute">transform-origin</span>:<span class="number">50px</span> <span class="number">50px</span>;</span><br><span class="line">			<span class="attribute">animation</span>:myRotate-before <span class="number">2s</span> linear;<span class="comment">/*自定义动画*/</span></span><br><span class="line">			<span class="attribute">-webkit-animation</span>:myRotate-before <span class="number">2s</span> linear;</span><br><span class="line">		&#125;</span><br><span class="line">		@<span class="keyword">-webkit-keyframes</span> myRotate-before /* Safari and Chrome */</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="selector-tag">from</span> &#123;<span class="attribute">transform</span>:<span class="built_in">rotate</span>(0deg);&#125;<span class="comment">/*动画的实现是从0度转到180度*/</span></span><br><span class="line">		<span class="selector-tag">to</span> &#123;<span class="attribute">transform</span>:<span class="built_in">rotate</span>(180deg);&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xk7fp.com1.z0.glb.clouddn.com/a.gif" alt=""></p>
+<p>利用:after为元素右侧也画一个半圆，代码部分的变动只是把刚才的半圆旋转到180度而已<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.circle</span><span class="selector-pseudo">:after</span>&#123;</span><br><span class="line">			<span class="attribute">box-sizing</span>:border-box;</span><br><span class="line">			<span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">			<span class="attribute">position</span>: absolute;</span><br><span class="line">			<span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">			<span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">			<span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">			<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">			<span class="attribute">border-radius</span>: <span class="number">50px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">50px</span>;</span><br><span class="line">			<span class="attribute">background</span>:<span class="built_in">rgba</span>(30,144,255,0.2);</span><br><span class="line">			<span class="attribute">transform</span>:<span class="built_in">rotate</span>(180deg);</span><br><span class="line">			<span class="attribute">transform-origin</span>:<span class="number">50px</span> <span class="number">50px</span>;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://7xk7fp.com1.z0.glb.clouddn.com/circle2.png" alt=""><br>如果将:before半圆旋转270度，与：after半圆重合起来看就是一个角度为270的圆。刚开始设置其属性为opacity：0，等到:before的半圆转到180后，将其opacity设为1，让这个躲在后面的圆显现出来即可。还有一点就是左边的遮罩在before半圆旋转范围在0-180时应该一直保持遮罩，但在180-360时就应该将其背景色调为transparent，使得：before半圆能够在180-360的旋转过程中完整显现出来。<br><img src="http://7xk7fp.com1.z0.glb.clouddn.com/circle3.png" alt=""><br>完整的css代码如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.circle</span>&#123;</span><br><span class="line">			<span class="attribute">box-sizing</span>:border-box;</span><br><span class="line">			<span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">			<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">			<span class="attribute">background</span>:white;</span><br><span class="line">			<span class="attribute">position</span>: relative;</span><br><span class="line">			<span class="attribute">animation</span>:myRotate <span class="number">2s</span>  linear forwards;<span class="comment">/*forward的用处是让动画停止在最后1帧*/</span></span><br><span class="line">			<span class="attribute">-webkit-animation</span>:myRotate <span class="number">2s</span>  linear forwards;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="selector-class">.circle</span><span class="selector-pseudo">:before</span>,<span class="selector-class">.circle</span><span class="selector-pseudo">:after</span>&#123;</span><br><span class="line">			<span class="attribute">box-sizing</span>:border-box;</span><br><span class="line">			<span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">			<span class="attribute">position</span>: absolute;</span><br><span class="line">			<span class="attribute">z-index</span>: -<span class="number">1</span>;</span><br><span class="line">			<span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">			<span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">			<span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">			<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">			<span class="attribute">border</span>: solid;</span><br><span class="line">			<span class="attribute">border-width</span>:<span class="number">10px</span> <span class="number">0</span> <span class="number">10px</span> <span class="number">10px</span>;<span class="comment">/*画圆环*/</span></span><br><span class="line">			<span class="attribute">border-color</span>:<span class="number">#0cf</span>;</span><br><span class="line">			<span class="attribute">border-radius</span>: <span class="number">50px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">50px</span>;<span class="comment">/*画半圆*/</span></span><br><span class="line">			<span class="attribute">background</span>:white;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="selector-class">.circle</span><span class="selector-pseudo">:before</span>&#123;</span><br><span class="line">			<span class="attribute">transform</span>:<span class="built_in">rotate</span>(0deg);</span><br><span class="line">			<span class="attribute">transform-origin</span>:<span class="number">50px</span> <span class="number">50px</span>;</span><br><span class="line">			<span class="attribute">animation</span>:myRotate-before <span class="number">2s</span>  linear forwards;</span><br><span class="line">			<span class="attribute">-webkit-animation</span>:myRotate-before <span class="number">2s</span>  linear forwards;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="selector-class">.circle</span><span class="selector-pseudo">:after</span>&#123;</span><br><span class="line">			<span class="attribute">transform</span>:<span class="built_in">rotate</span>(180deg);</span><br><span class="line">			<span class="attribute">transform-origin</span>:<span class="number">50px</span> <span class="number">50px</span>;</span><br><span class="line">			<span class="attribute">animation</span>:myRotate-after <span class="number">2s</span> linear forwards;</span><br><span class="line">			<span class="attribute">-webkit-animation</span>:myRotate-after <span class="number">2s</span>  linear forwards;</span><br><span class="line">			<span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		@<span class="keyword">-webkit-keyframes</span> myRotate-before /* Safari and Chrome */</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="selector-tag">from</span> &#123;<span class="attribute">transform</span>:<span class="built_in">rotate</span>(0deg);&#125;</span><br><span class="line">		<span class="selector-tag">to</span> &#123;<span class="attribute">transform</span>:<span class="built_in">rotate</span>(320deg);&#125;<span class="comment">/*可以自己调整*/</span></span><br><span class="line">		&#125;</span><br><span class="line">		@<span class="keyword">-webkit-keyframes</span> myRotate-after  /*Safari and Chrome*/</span><br><span class="line">		&#123;</span><br><span class="line">		0%&#123;</span><br><span class="line">		    <span class="attribute">opacity</span>:<span class="number">0</span>;</span><br><span class="line">		  &#125;</span><br><span class="line">		  55%</span><br><span class="line">		  &#123;</span><br><span class="line">		    <span class="attribute">opacity</span>:<span class="number">0</span>;</span><br><span class="line">		  &#125;</span><br><span class="line">		  56%</span><br><span class="line">		  &#123;</span><br><span class="line">		    <span class="attribute">opacity</span>:<span class="number">1</span>;</span><br><span class="line">		  &#125;</span><br><span class="line">		  100%</span><br><span class="line">		  &#123;</span><br><span class="line">		    <span class="attribute">opacity</span>:<span class="number">1</span>;</span><br><span class="line">		  &#125;</span><br><span class="line">		&#125;</span><br><span class="line">		@<span class="keyword">-webkit-keyframes</span> myRotate  /*Safari and Chrome*/</span><br><span class="line">		&#123;</span><br><span class="line">		0%&#123;</span><br><span class="line">		   <span class="attribute">background</span>:white;</span><br><span class="line">		  &#125;</span><br><span class="line">		  56%</span><br><span class="line">		  &#123;</span><br><span class="line">		    <span class="attribute">background</span>:white;</span><br><span class="line">		  &#125;</span><br><span class="line">		  57%</span><br><span class="line">		  &#123;</span><br><span class="line">		    <span class="attribute">background</span>:transparent;</span><br><span class="line">		  &#125;</span><br><span class="line">		  100%</span><br><span class="line">		  &#123;</span><br><span class="line">		    <span class="attribute">background</span>:transparent;</span><br><span class="line">		  &#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://7xk7fp.com1.z0.glb.clouddn.com/final.gif" alt=""><br>参考的这篇文章:<a href="http://www.oxxostudio.tw/articles/201503/css-pie-chart.html" target="_blank" rel="external">純 CSS 繪製圓餅圖</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/19/circle/" data-id="cjls7pshr0003c6sgtarcml15" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/16/delete-remote-repository-folder/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          删除远程仓库的文件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/12/list-menu/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">制作input下拉菜单</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pixhawk/">pixhawk</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protocal/">protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活，婚礼，朋友/">生活，婚礼，朋友</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科研/">科研</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodeJs-protocal/" style="font-size: 10px;">nodeJs,protocal</a> <a href="/tags/pixhawk/" style="font-size: 17.5px;">pixhawk</a> <a href="/tags/protocal/" style="font-size: 10px;">protocal</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/生活，婚礼，朋友/" style="font-size: 12.5px;">生活，婚礼，朋友</a> <a href="/tags/科研/" style="font-size: 12.5px;">科研</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <script src="/list-menu.js"></script>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 KenziD<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+       <p>Connect me by Rob10085@gmail.com</p>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

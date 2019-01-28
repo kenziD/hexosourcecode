@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>kenziD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="kenziD">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="kenziD">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kenziD">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="kenziD" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kenziD</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A Girl Who Love Programming</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-inline-block元素的诡异样式问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/12/inline-block元素的诡异样式问题/" class="article-date">
+  <time datetime="2018-07-12T13:49:34.000Z" itemprop="datePublished">2018-07-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/12/inline-block元素的诡异样式问题/">inline-block元素的诡异样式问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="记录一次inline-block引起的诡异样式错位">记录一次inline-block引起的诡异样式错位</h3><p><img src="cssp.PNG" alt=""><br>想在colorPicker后面加一个icon，点击增加就可以继续增加colorPicker，<br>用了一个div套i标签，然后设置div为inline-block，但是发现这个div和前面的colorPicker的div怎么都不在一条水平线上。特别尴尬。<br>同样都是inline-block布局，到底哪里出了问题。<br>后来仔细看了zxx大佬的博客<a href="https://www.zhangxinxu.com/wordpress/2015/08/css-deep-understand-vertical-align-and-line-height/" target="_blank" rel="external">CSS深入理解vertical-align和line-height的基友关系</a>，终于找到了理论基础<a href="https://www.w3.org/TR/CSS21/visudet.html#propdef-vertical-align" target="_blank" rel="external">w3c可视化格式模型文档</a>：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The baseline <span class="keyword">of</span> <span class="keyword">an</span> <span class="string">'inline-block'</span> is <span class="keyword">the</span> baseline <span class="keyword">of</span> its <span class="keyword">last</span> <span class="built_in">line</span> box <span class="keyword">in</span> <span class="keyword">the</span> <span class="keyword">normal</span> flow, unless <span class="keyword">it</span> has either no <span class="keyword">in</span>-flow <span class="built_in">line</span> boxes <span class="keyword">or</span> <span class="keyword">if</span> its <span class="string">'overflow'</span> property has <span class="keyword">a</span> computed <span class="built_in">value</span> other than <span class="string">'visible'</span>, <span class="keyword">in</span> which <span class="keyword">case</span> <span class="keyword">the</span> baseline is <span class="keyword">the</span> bottom margin edge.</span><br></pre></td></tr></table></figure></p>
+<p>意思就是：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个inline-block元素，如果里面没有inline内联元素，或者<span class="attribute">overflow</span>不是visible，则该元素的基线就是其<span class="attribute">margin</span>底边缘，否则，其基线就是元素里面最后一行内联元素的基线</span><br></pre></td></tr></table></figure></p>
+<p>这就解释了本文中的两个inline-block元素无法对齐：<br>因为colorPicker的div里面没有inline内联元素，所以其基线就是margin底边缘。<br>但是我的icon div盒子里有一个i标签是inline内联元素，所以其基线是i标签内联元素的基线。</p>
+<p>zxx博客的这部分内容很好的复现了上述问题。<br><img src="exa.png" alt=""></p>
+<p>针对博客最后的那个例子我做了几个demo，和博客对比着看。</p>
+<ol>
+<li><p>通过那个规则，改变inline-block基线的位置，从而间距消除<br><img src="a.gif" alt=""></p>
+</li>
+<li><p>通过改变font-size使基线和中线重合<br><img src="b.gif" alt=""></p>
+</li>
+<li><p>通过改变vertical-align的规则，不要基线对齐。从而消除间距<br><img src="c.gif" alt=""></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/12/inline-block元素的诡异样式问题/" data-id="cjls7psir000mc6sgt7piak4z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="http-4xx" class="article article-type-http" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/30/4xx/" class="article-date">
+  <time datetime="2016-05-30T02:43:17.000Z" itemprop="datePublished">2016-05-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/30/4xx/">4xx</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是我阅读http协议4xx状态码的笔记</p>
+<p>4xx开头的表示这是客户端出现了错误。</p>
+<p>除非请求是head方法，否则服务端都应该在请求体中描述出错的情况，永久错误还是临时性错误。</p>
+<h3 id="400_Bad_Request">400 Bad Request</h3><p>表示请求语法错误，而且这个请求也不应该被重复提交。</p>
+<h3 id="401">401</h3><h3 id="401_vs_403">401 vs 403</h3><p>401 和 403的区别是，401可能是你认证不通过，也有可能是你压根没有认证那个header，所以你可以修改一下认证重新提交相同的请求，403则不管你有没有认证，即便是认证通过了，但你依然没有权限访问这个uri.</p>
+<p><img src="http://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses" alt="403 Forbidden vs 401 Unauthorized HTTP responses"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/30/4xx/" data-id="cjls7psi00005c6sghf3jd9pf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-pure-nodejs-simple-server" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/22/pure-nodejs-simple-server/" class="article-date">
+  <time datetime="2016-05-22T08:02:30.000Z" itemprop="datePublished">2016-05-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>用nodejs的http模块和fs模块。搭建一个简单的服务器。路由规则用正则。</p>
+<h2 id="创建一个服务端">创建一个服务端</h2><p>node可以发送请求，也可以监听某个端口，响应http请求。</p>
+<p>创建服务端,并监听2016端口。</p>
+<p>处理get请求:get.js</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用http模块</span></span><br><span class="line"><span class="built_in">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 引用url模块</span></span><br><span class="line"><span class="built_in">var</span> <span class="built_in">url</span> = <span class="built_in">require</span>(<span class="string">"url"</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 引用querystring模块</span></span><br><span class="line"><span class="built_in">var</span> querystring = <span class="built_in">require</span>(<span class="string">"querystring"</span>);</span><br><span class="line"> </span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">request, response</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">var</span> objectUrl = <span class="built_in">url</span>.parse(request.url);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">var</span> objectQuery = querystring.parse(objectUrl.query);</span><br><span class="line"> </span><br><span class="line">	response.writeHead(<span class="number">200</span>, &#123;</span><br><span class="line">		<span class="string">"content-type"</span>: <span class="string">"text/html"</span></span><br><span class="line">	&#125;);</span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 输出url的各项参数</span></span><br><span class="line">	response.write(<span class="string">"&lt;h1&gt;objectUrl&lt;/h1&gt;"</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="built_in">var</span> i <span class="keyword">in</span> objectUrl) &#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">typeof</span> (objectUrl[i]) != <span class="string">"function"</span>) </span><br><span class="line">			response.write(i + <span class="string">"=&gt;"</span> + objectUrl[i] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 输出url中的query的各项参数</span></span><br><span class="line">	response.write(<span class="string">"&lt;h1&gt;objectQuery&lt;/h1&gt;"</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="built_in">var</span> i <span class="keyword">in</span> objectQuery) &#123;</span><br><span class="line">		response.write(i + <span class="string">"=&gt;"</span> + objectQuery[i] + <span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	response.end();</span><br><span class="line">&#125;).listen(<span class="number">2016</span>);</span><br></pre></td></tr></table></figure>
+<p>在本文件的目录下，运行node get.js</p>
+<p>然后浏览器输入localhost:2016回车。</p>
+<p>request.url表示请求的url。如：”/“,如果你输入form。则会返回”/form”。</p>
+<p>比如你输了这样一串url:</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span><span class="comment">//localhost:2014/form?name=kenzi&amp;age=20&amp;sex=female</span></span><br></pre></td></tr></table></figure>
+<p>url.parse这个模块会对url进行解析：</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="decorator">Url</span> &#123;</span><br><span class="line"><span class="attribute">protocol</span>: <span class="literal">null</span>,</span><br><span class="line"><span class="attribute">slashes</span>: <span class="literal">null</span>,</span><br><span class="line"><span class="attribute">auth</span>: <span class="literal">null</span>,</span><br><span class="line"><span class="attribute">host</span>: <span class="literal">null</span>,</span><br><span class="line"><span class="attribute">port</span>: <span class="literal">null</span>,</span><br><span class="line"><span class="attribute">hostname</span>: <span class="literal">null</span>,</span><br><span class="line"><span class="attribute">hash</span>: <span class="literal">null</span>,</span><br><span class="line"><span class="attribute">search</span>: <span class="string">'?name=kenzi&amp;age=20&amp;sex=female'</span>,</span><br><span class="line"><span class="attribute">query</span>: <span class="string">'name=kenzi&amp;age=20&amp;sex=female'</span>,</span><br><span class="line"><span class="attribute">pathname</span>: <span class="string">'/form'</span>,</span><br><span class="line"><span class="attribute">path</span>: <span class="string">'/form?name=kenzi&amp;age=20&amp;sex=female'</span>,</span><br><span class="line"><span class="attribute">href</span>: <span class="string">'/form?name=kenzi&amp;age=20&amp;sex=female'</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="http://itbilu.com/nodejs/core/NJGRdjgU.html" target="_blank" rel="external">url模块的使用方法</a></p>
+<h2 id="参考">参考</h2><p><a href="http://blog.frankgrimm.net/2010/11/howto-access-http-message-body-post-data-in-node-js/" target="_blank" rel="external">Accessing the HTTP message body (e.g. POST data) in node.js</a></p>
+<p><a href="http://www.dotnetcurry.com/nodejs/1144/nodejs-html-static-pages-website" target="_blank" rel="external">http://www.dotnetcurry.com/nodejs/1144/nodejs-html-static-pages-website</a></p>
+<p><a href="https://github.com/dotnetcurry/node.js-html-static-content/blob/master/server.js" target="_blank" rel="external">https://github.com/dotnetcurry/node.js-html-static-content/blob/master/server.js</a></p>
+<p><a href="https://cnodejs.org/topic/51738afd6d38277306ef98ad" target="_blank" rel="external">https://cnodejs.org/topic/51738afd6d38277306ef98ad</a></p>
+<p><a href="http://mongoosejs.com/docs/index.html" target="_blank" rel="external">mongoose quik start</a></p>
+<h2 id="题外话">题外话</h2><p>因为刚学http协议，很想自己搭建一个服务器实践一下。比如实现一个简单的点赞功能，登录功能等。而且一直想学习node所以选了node作为后端语言。如果以后有机会，也许会用其他语言试一试。网上搜索的很多例子都是nodejs＋express框架。使用express框架可能会方便很多。不过我认为还是应该从基层写起，这样才会知道为啥要使用某个框架，框架帮你处理了什么。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/22/pure-nodejs-simple-server/" data-id="cjls7psjp001cc6sgggxy0cjh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-nodeJsSimpleServer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/22/nodeJsSimpleServer/" class="article-date">
+  <time datetime="2016-05-21T16:25:50.000Z" itemprop="datePublished">2016-05-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/22/nodeJsSimpleServer/">nodeJsSimpleServer</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/22/nodeJsSimpleServer/" data-id="cjls7psjx001jc6sgh31alz8p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-字符串编码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/17/字符串编码/" class="article-date">
+  <time datetime="2016-05-17T05:34:14.000Z" itemprop="datePublished">2016-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/17/字符串编码/">字符串编码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前对url进行编码的时候遇到过encodeURI和encodeURIComponent，如今要设置cookie的value又遇到了escape()，并且提示说，尽量不用这个方法。</p>
+<p><img src="img/escape.png" alt=""></p>
+<p>那么这些方法有什么区别呢？</p>
+<h3 id="escape">escape</h3><p>首先这个方法被不推荐使用。如上图所示。</p>
+<p>它不会对ASCII字母 数字  * @ - _ + . /这些符号进行转义。</p>
+<p>下面这张table表示了escape方法对哪些字符进行编码：<br><img src="img/escape-encode.png" alt=""><br>下面这张table表示了escape方法对哪些字符不进行编码：<br><img src="img/escape-noencode.png" alt=""></p>
+<h3 id="encodeURI">encodeURI</h3><p>下面内容部分来自于知乎答案：<a href="https://www.zhihu.com/question/21861899/answer/20300871" target="_blank" rel="external">黄家兴的回答</a></p>
+<p>他用来对完整的url编码。它不会对：ASCII字母 数字 ~ ! @ # $ &amp; * ( ) = : / , ; ? + ‘ 这些符号进行转义。</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">encodeURI(<span class="string">"http://www.cnblogs.com/season-huang/some other thing"</span>);</span><br><span class="line"></span><br><span class="line">//<span class="literal">result</span></span><br><span class="line"><span class="string">"http://www.cnblogs.com/season-huang/some%20other%20thing"</span>;</span><br></pre></td></tr></table></figure>
+<p>其中，空格被编码成了%20。但是如果你用了encodeURIComponent，那么结果变为<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"http%3A%2F%2Fwww.cnblogs.com%2Fseason-huang%2Fsome%20other%20thing"</span></span><br></pre></td></tr></table></figure></p>
+<p>看到了区别吗，连 “/“ 都被编码了，整个URL已经没法用了。</p>
+<p>下面这张table表示了encodeURI方法对哪些字符进行编码：<br><img src="img/encodeURI-encode.png" alt=""><br>下面这张table表示了encodeURI方法对哪些字符不进行编码：<br><img src="img/encodeURI-noencode.png" alt=""></p>
+<h3 id="encodeURIComponent">encodeURIComponent</h3><p>他用来对url的部分query参数进行编码。它不会对ASCII字母 数字 ~ ! * ( ) ‘这些符号进行转义。</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> param = <span class="string">"http://www.cnblogs.com/season-huang/"</span>; <span class="comment">//param为参数</span></span><br><span class="line">param = <span class="built_in">encodeURIComponent</span>(param);</span><br><span class="line"><span class="built_in">var</span> <span class="built_in">url</span> = <span class="string">"http://www.cnblogs.com?next="</span> + param;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">url</span>) <span class="comment">//"http://www.cnblogs.com?next=http%3A%2F%2Fwww.cnblogs.com%2Fseason-huang%2F"</span></span><br></pre></td></tr></table></figure>
+<p>下面这张table表示了encodeURIComponent方法对哪些字符进行编码：<br><img src="img/encodeURIComponent-encode.png" alt=""></p>
+<p>下面这张table表示了encodeURIComponent方法对哪些字符不进行编码：<br><img src="img/encodeURIComponent-noencode.png" alt=""></p>
+<h3 id="总结">总结</h3><p>escape不推荐使用</p>
+<p>encodeURIComponent会毁掉整个url，他只适用于当一个url是另一个url的参数时，对其进行编码</p>
+<p>encodeURI可以对完整的url进行编码。</p>
+<h3 id="题外话">题外话</h3><p>这些数据是我用一下代码生成的：</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> arr1 = [];</span><br><span class="line"><span class="built_in">var</span> arr2 = [];</span><br><span class="line"><span class="built_in">var</span> arr3 = [];</span><br><span class="line"><span class="built_in">var</span> arr4 = [];</span><br><span class="line"><span class="built_in">var</span> arr5 = [];</span><br><span class="line"><span class="built_in">var</span> arr6 = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">var</span> i = <span class="number">0</span>; i &lt; <span class="number">127</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">var</span> char = <span class="built_in">String</span>.fromCharCode(i);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">encodeURI</span>(char) == char) &#123;</span><br><span class="line">        arr1.push(&#123;</span><br><span class="line">            <span class="attribute">charcode</span>: i,</span><br><span class="line">            <span class="attribute">character</span>: char,</span><br><span class="line">            <span class="attribute">encodeURI</span>: <span class="built_in">encodeURI</span>(char),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">encodeURI</span>(char) !== char) &#123;</span><br><span class="line">        arr2.push(&#123;</span><br><span class="line">            <span class="attribute">charcode</span>: i,</span><br><span class="line">            <span class="attribute">character</span>: char,</span><br><span class="line">            <span class="attribute">encodeURI</span>: <span class="built_in">encodeURI</span>(char),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">escape</span>(char) == char) &#123;</span><br><span class="line">        arr3.push(&#123;</span><br><span class="line">            <span class="attribute">charcode</span>: i,</span><br><span class="line">            <span class="attribute">character</span>: char,</span><br><span class="line">            <span class="attribute">escape</span>: <span class="built_in">escape</span>(char),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">escape</span>(char) !== char) &#123;</span><br><span class="line">        arr4.push(&#123;</span><br><span class="line">            <span class="attribute">charcode</span>: i,</span><br><span class="line">            <span class="attribute">character</span>: char,</span><br><span class="line">            <span class="attribute">escape</span>: <span class="built_in">escape</span>(char),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">encodeURIComponent</span>(char) == char) &#123;</span><br><span class="line">        arr5.push(&#123;</span><br><span class="line">            <span class="attribute">charcode</span>: i,</span><br><span class="line">            <span class="attribute">character</span>: char,</span><br><span class="line">            <span class="attribute">encodeURIComponent</span>: <span class="built_in">encodeURIComponent</span>(char),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">encodeURIComponent</span>(char) !== char) &#123;</span><br><span class="line">        arr6.push(&#123;</span><br><span class="line">            <span class="attribute">charcode</span>: i,</span><br><span class="line">            <span class="attribute">character</span>: char,</span><br><span class="line">            <span class="attribute">encodeURIComponent</span>: <span class="built_in">encodeURIComponent</span>(char),</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后用console.table(arr1)就可以在控制台打印了。</p>
+<p>然而console.table这么方便有木有可以直接把array转成table的api，直接显示在网页上？上网找了一下貌似不太可心。而且这么基础的程序我希望能用原生js实现。so，做了个轮子，把array转成table。基本实现了console.table的用法。<a href="https://github.com/kenziD/arrayToTable" target="_blank" rel="external">传送门</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/17/字符串编码/" data-id="cjls7pskc001rc6sg9h13e470" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-http" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/14/http/" class="article-date">
+  <time datetime="2016-05-14T07:38:48.000Z" itemprop="datePublished">2016-05-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/14/http/">http协议学习笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有部分内容来自<a href="http://www.newmediacampaigns.com/blog/browser-rest-http-accept-headers" target="_blank" rel="external">Unacceptable Browser HTTP Accept Headers (Yes, You Safari and Internet Explorer)</a></p>
+<h2 id="报头详解">报头详解</h2><h3 id="Accept_深入理解">Accept 深入理解</h3><p>属于请求头。客户端对服务端的协商。</p>
+<p>表示接受的 MIME type.</p>
+<p>MIME(Multipurpose Internet Mail Extensions) 表示多功能 Internet 邮件扩充服务。本来是用来定义邮件接受的媒体类型。后来被应用到http协议上后，内容就变得多种多样了。一共有七种<br>text,img,video,audio,multipart,application,<br>其中他们还有子类。比如text/html,text/plain,img/jpeg,img/gif等。</p>
+<p>格式为：*/*;q=float 用分号分隔; 默认情况为q=1。q表示用户对某种类型的接受程度。</p>
+<p>比如：chrome 浏览器下：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET <span class="regexp">/Protocols/</span>rfc2616<span class="regexp">/rfc2616-sec7.html HTTP/</span><span class="number">1.1</span></span><br><span class="line"><span class="string">Host:</span> www.w3.org</span><br><span class="line"><span class="string">Accept:</span>text<span class="regexp">/html,application/</span>xhtml+xml,application<span class="regexp">/xml;q=0.9,image/</span>webp,*<span class="comment">/*;q=0.8</span></span><br></pre></td></tr></table></figure></p>
+<p>表示:</p>
+<p>如果有text/html image/webp application/xhtml+xml这些格式最好。100%</p>
+<p>如果上面的都没有，给我xml格式。90%</p>
+<p>如果还是没有就给我啥都行。80%</p>
+<p>再比如：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept: <span class="built_in">text</span>/*;q=<span class="number">0.3</span>, <span class="built_in">text</span>/html;q=<span class="number">0.7</span>, <span class="built_in">text</span>/html;level=<span class="number">1</span>,<span class="built_in">text</span>/html;level=<span class="number">2</span>;q=<span class="number">0.4</span>, */*;q=<span class="number">0.5</span></span><br></pre></td></tr></table></figure></p>
+<p>text/html;level=1         = 1</p>
+<p>text/html                 = 0.7</p>
+<p>text/plain                = 0.3</p>
+<p>image/jpeg                = 0.5</p>
+<p>text/html;level=2         = 0.4</p>
+<p>text/html;level=3         = 0.7</p>
+<p>我在想，请求行里的url的扩展里已经包括了资源的类型:.html,.jpeg等，为什么还要通过accept告诉服务器自己接受什么类型的文件呢？猜想直接指明类型会更快的响应请求。省的解析url里的类型。也有的不一定就能返回特定的指定类型，如果没有，也可以用其他类型代替。有一定的容错性。而且不一定url的请求就是一个指定的文件，可能只是某个文件夹。</p>
+<p>不过听说，这些服务商都不用accept：</p>
+<blockquote>
+<p>As stated, Twitter’s REST API doesn’t use the Accept header for content-negotiation, they use extensions on the URL ‘.json’ and ‘.xml’.</p>
+<p>Rails disables the Accept header by default. </p>
+<p>Frameworks can enhance performance by ignoring the Accept header and relying on ‘.xml’-like extensions.</p>
+<p>As such the next release of the Recess Framework, too, will disable Accept header based content-negotiation by default.</p>
+</blockquote>
+<p>这里的twitter就是直接通过解析扩展来确定类型的。</p>
+<p>因为不同的浏览器对于某种类型的文件都有自己特定的accept定义，告诉服务器自己接受什么类型的文件。<br>如：firefox浏览器对于html文件的accept是：</p>
+<blockquote>
+<p>text/html,application/xhtml+xml,application/xml;q=0.9,<em>/</em>;q=0.8</p>
+</blockquote>
+<p>表示</p>
+<blockquote>
+<p>Dear host,<br>I want the resource in an HTML or XHTML format. If you cannot serve me this way, I’ll take it in an XML instead. If you can’t even give it to me in XML, well, I’ll take anything you’ve got!<br>Love,<br>Firefox</p>
+</blockquote>
+<p>ie 呢，就发一大堆：</p>
+<blockquote>
+<p>image/jpeg, application/x-ms-application, image/gif, application/xaml+xml, image/pjpeg, application/x-ms-xbap, application/x-shockwave-flash, application/msword, <em>/</em></p>
+</blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation" target="_blank" rel="external">具体不同浏览器的文件类型对应的accept形式</a></p>
+<h2 id="content-type">content-type</h2><p>content-type不管是请求还是响应都应该有。</p>
+<p>响应中的content-type很好理解。通过请求中的accept来告知响应内容的类型。</p>
+<p>那么请求中的content-type又是什么意思呢？</p>
+<p>如果是post方法，那么空格后的那个message-body 里的格式就可以由content-type来传达。比如form。application/x-www-form-urlencoded or multipart/form-data</p>
+<p>但如果是get方法呢？为什么需要这个东西？</p>
+<p>我发现如果把响应中的content-type写成text/html 刷新时浏览器会渲染html页面。而如果把content-type写成img/jpeg，刷新chrome浏览器的时候会直接下载文件。可能这就是chrome浏览器针对http协议的一些设置。看来了解http协议这种约定俗称的规范，可以让浏览器帮助完成一些事情。</p>
+<h2 id="区别">区别</h2><p>content－type和accept有啥区别呢？虽然都规定了mime的类型，<br>缓存机制：</p>
+<p>HTTP定义了3种缓存机制：<br>l Freshness allows a response to be used without re-checking it on the origin server, and can be controlled by both the server and the client. For example, the Expires response header gives a date when the document becomes stale, and the Cache-Control: max-age directive tells the cache how many seconds the response is fresh for.<br>l Validation can be used to check whether a cached response is still good after it becomes stale. For example, if the response has a Last-Modified header, a cache can make a conditional request using the If-Modified-Since header to see if it has changed.<br>l Invalidation is usually a side effect of another request that passes through the cache. For example, if URL associated with a cached response subsequently gets a POST, PUT or DELETE request, the cached response will be invalidated.</p>
+<p>也就是说post发送的东西都不会被缓存，get方法发送的会被缓存哦。</p>
+<h2 id="参考">参考</h2><p><a href="http://www.chedong.com/tech/cache_docs.html" target="_blank" rel="external">面向站长和网站管理员的Web缓存加速指南</a><br><a href="https://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank" rel="external">Hypertext Transfer Protocol — HTTP/1.1</a><br><a href="https://www.zybuluo.com/yangfch3/note/167490" target="_blank" rel="external">HTTP协议详解</a><br><a href="https://www.zybuluo.com/yangfch3/note/113028" target="_blank" rel="external">输入网址之后发生了什么</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/14/http/" data-id="cjls7psjb0012c6sg45f6olce" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/protocal/">protocal</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-promise" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/08/promise/" class="article-date">
+  <time datetime="2016-05-08T14:37:59.000Z" itemprop="datePublished">2016-05-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/08/promise/">初探promise</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="插件">插件</h2><p>今天实现了一个插件的动画，就是纸从折叠到展开的效果。主要用css3的tansition实现。js监听第一个列表rotate结束(监听transitionend事件)，然后开始第二个rotate开始，transition结束后，再开始第三个的展开。回调地狱有木有。于是学了一下promise规范。发现es6已经有了原生的方法。就没有用库。看了回调地狱的官网(居然有官网)，感觉概念清晰了很多。按照里面的方法重构了代码。看起来清晰多了。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/05/08/promise/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/08/promise/" data-id="cjls7psj90010c6sgvaku15ar" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-gitError" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/07/gitError/" class="article-date">
+  <time datetime="2016-05-07T14:10:38.000Z" itemprop="datePublished">2016-05-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/07/gitError/">gitError</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天遇到一个问题，在电脑a上修改了一些文件，并且没有add。突然断电了。我就打开电脑b，git fetch<br>git merge。修改好了。上传上去。电脑a开起来后。我直接git fetch／git merge。提示错误：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Updating <span class="number">1463929.</span><span class="number">.0e12104</span></span><br><span class="line">error: Your <span class="built_in">local</span> changes <span class="built_in">to</span> <span class="keyword">the</span> following <span class="built_in">files</span> would be overwritten <span class="keyword">by</span> <span class="built_in">merge</span>:</span><br><span class="line">	changeBgColor/popup.html</span><br><span class="line">	changeBgColor/popup.js</span><br><span class="line">Please, commit your changes <span class="keyword">or</span> stash them <span class="keyword">before</span> you can <span class="built_in">merge</span>.</span><br><span class="line">Aborting</span><br></pre></td></tr></table></figure></p>
+<p>所以如果你在本地修改了乱七八糟一堆没用的，就可以用<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">reset</span> <span class="comment">--hard</span></span><br><span class="line">git <span class="keyword">fetch</span></span><br><span class="line">git <span class="keyword">merge</span></span><br></pre></td></tr></table></figure></p>
+<p>就可以了。<code>git reset --hard</code>的作用是把所有文件恢复到上一次commit时的状态。</p>
+<p>如果还没<code>git add</code>，想单独恢复一个文件：<code>git checkout filename</code>就可以了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/07/gitError/" data-id="cjls7psil000ic6sgtwmr94f9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-json-format" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/31/json-format/" class="article-date">
+  <time datetime="2016-03-31T06:24:47.000Z" itemprop="datePublished">2016-03-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/31/json-format/">json数据要用双引号</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天遇到了一个json的坑，原来json里的字符串必须是双引号，我用单引号，sublime就提示高亮的错误，而且jquery的<br>$.get()或者 $.getJSON()都没反应，调不到数据。改成双引号就一切ok了<br><a href="http://www.json.org/index.html">json 官方网站</a>也是这么说的(double quote!)</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/03/31/json-format/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/31/json-format/" data-id="cjls7psj0000sc6sgqo5hnp24" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-css-specifity" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/24/css-specifity/" class="article-date">
+  <time datetime="2016-03-24T11:53:48.000Z" itemprop="datePublished">2016-03-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/24/css-specifity/">CSS 权重</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对css权重的概念理解的并不深入，很多是流于表面。先从css权重讲起吧。</p>
+<p>本文参考了：<br><a href="http://www.w3cplus.com/css/css-specificity-things-you-should-know.html">你应该知道的一些事情——CSS权重</a></p>
+        
+          <p class="article-more-link">
+            <a href="/2016/03/24/css-specifity/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/24/css-specifity/" data-id="cjls7psi70008c6sghz3zv5pu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pixhawk/">pixhawk</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protocal/">protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活，婚礼，朋友/">生活，婚礼，朋友</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科研/">科研</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodeJs-protocal/" style="font-size: 10px;">nodeJs,protocal</a> <a href="/tags/pixhawk/" style="font-size: 17.5px;">pixhawk</a> <a href="/tags/protocal/" style="font-size: 10px;">protocal</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/生活，婚礼，朋友/" style="font-size: 12.5px;">生活，婚礼，朋友</a> <a href="/tags/科研/" style="font-size: 12.5px;">科研</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <script src="/list-menu.js"></script>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 KenziD<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+       <p>Connect me by Rob10085@gmail.com</p>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

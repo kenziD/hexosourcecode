@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Pixhawk log日志分析 by MissionPlanner | kenziD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="从上电到开始飞行，说明等待其初始化时间，包括飞控初始化，GPS锁星，错误解除等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pixhawk log日志分析 by MissionPlanner">
+<meta property="og:url" content="http://yoursite.com/2015/11/24/px4-analyze/index.html">
+<meta property="og:site_name" content="kenziD">
+<meta property="og:description" content="从上电到开始飞行，说明等待其初始化时间，包括飞控初始化，GPS锁星，错误解除等。">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/powerOn.png">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/start.png">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/ThrInvsThrOut.png">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/heightCompare.png">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/accCompare.png">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/vib.png">
+<meta property="og:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/Image%206.jpg">
+<meta property="og:updated_time" content="2015-11-26T08:40:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Pixhawk log日志分析 by MissionPlanner">
+<meta name="twitter:description" content="从上电到开始飞行，说明等待其初始化时间，包括飞控初始化，GPS锁星，错误解除等。">
+<meta name="twitter:image" content="http://7xk7fp.com1.z0.glb.clouddn.com/powerOn.png">
+  
+    <link rel="alternative" href="/atom.xml" title="kenziD" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kenziD</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A Girl Who Love Programming</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-px4-analyze" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/24/px4-analyze/" class="article-date">
+  <time datetime="2015-11-24T05:21:28.000Z" itemprop="datePublished">2015-11-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Pixhawk log日志分析 by MissionPlanner
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://7xk7fp.com1.z0.glb.clouddn.com/powerOn.png" alt=""><br><img src="http://7xk7fp.com1.z0.glb.clouddn.com/start.png" alt=""><br>从上电到开始飞行，说明等待其初始化时间，包括飞控初始化，GPS锁星，错误解除等。</p>
+<a id="more"></a>
+<p>从CTUN:ThrIn和ThrOut的曲线可以详细看出操作手的操作过程和飞行情况。<br><img src="http://7xk7fp.com1.z0.glb.clouddn.com/ThrInvsThrOut.png" alt=""><br>第一次第二次的自稳飞行都没有太大的问题。</p>
+<p>仔细观察高度和输入输出的油门曲线：<br><img src="http://7xk7fp.com1.z0.glb.clouddn.com/heightCompare.png" alt=""><br>设定为定高模式起飞的时候，遥控油门上推，但是四轴油门并没有跟踪遥控油门，导致四轴飞不起来.<br>A点时刻，飞机突然升到1.6米高，所以操作手快速减少了油门，飞机掉落一点，然后又稍稍加大油门，飞机油门输出开始不受控制，表现为飞机抖动，切换成自稳模式后，飞机油门重新恢复跟踪遥控油门，所以猜想原因是定高模式下油门跟踪不灵敏。<br>下一个时刻的真实情况是飞机撞到了墙壁，浆被摔断。所以飞机开始失去平衡。并掉落下来。<br>从加速度计的Roll的情况可以看出：<br><img src="http://7xk7fp.com1.z0.glb.clouddn.com/accCompare.png" alt=""><br>初步分析为，定高模式的跟踪不够灵敏，或者电机导致。</p>
+<blockquote>
+<p>定高模式是由气压计进行测量的。高度每升高9米，气压大概降低100Pa，我们知道了海平面的气压是101325Pa和当前的气压值，就可以根据差值大概计算当前高度。</p>
+<p>加速度计和气压计协同定高就像陀螺仪和加速度计协同进行姿态解算一样，各有各优缺点。加速度计有静差，而且加速度计进行二次积分后数据漂移过大，但是加速度计进行积分短时间内是精准的，就像姿态解算中陀螺仪的积分短时间内是非常精准的。气压计由于测量精度有限，只能达到10cm，所以气压计输出的数据直接转化为高度的话会有几十厘米的浮动，直接用于高度控制显然是不现实的，但是气压计长时间来看，其值又是非常具有参考性的，因为它的值在真实值附近浮动。基于此，我们可以将加速度计的值进行积分后与气压计的值进行互补滤波或卡尔曼滤波，这样就能取长补短，获得较好的效果。</p>
+</blockquote>
+<p>所以加速度计的抖动可能会导致高度测量不准确，使定高模式的飞机一飞冲天。</p>
+<p>正如官网上所说：</p>
+<blockquote>
+<p>Vibrations<br>High vibrations cause the Copter’s accelerometer based altitude and horizontal position estimates to drift far off from reality which leads to problems with alt hold (normally rocketing into the sky) or Loiter (drifting).</p>
+<p>大幅度振动使得依赖于加速度计的高度和水平位置的估测不准确，会有飘逸，远离真实值，将导致定高出现问题（像火箭一样冲天）和定点出现问题（漂移）</p>
+</blockquote>
+<p>也就是官网上给出的原因是加速度计的振动。且官方给出的范围是X，Y不要超过+-3，Z轴为-15至-5.</p>
+<p>我的log：<br><img src="http://7xk7fp.com1.z0.glb.clouddn.com/vib.png" alt=""><br>在前面的自稳飞行是正常的。即使是定高模式，也处于正常范围内。后面的大幅度抖动应该是由于撞落瞬间导致的。所以我认为我的飞机有一飞冲天的趋势的原因与加速度z轴的抖动无关。</p>
+<p>官网关于消除抖动的说明：</p>
+<blockquote>
+<p>My overpowered copter rockets into the air can’t be brought down unless I cut the throttle</p>
+<p>Very over powered multicopters can require so little throttle to hover that even the minimum throttle (13%) is enough for them climb. In addition, the default Rate roll/pitch gains, which are meant for weaker copter, are too high for a powerful copter and can lead to roll/pitch instability. The Copter firmware may try to compensate for this roll/pitch instability by increasing the overall throttle which can lead to the copter climbing further (Note: in this particular case Copter increasing the overall throttle is counter-productive but in a properly tuned quad it helps in cases where there is a motor failure).</p>
+<p>The possible solutions are:</p>
+<ul>
+<li>add extra weight to your frame to bring the hover throttle closer to mid stick</li>
+<li>reduce the THR_MIN parameter (default is 130 or 13%) to the lowest value that will still keep all motors spinning reliably</li>
+<li>set the rate roll/pitch gains low (perhaps 1/2 the default) during the first flight and increase them from there. Consider using the CH6 tuning feature to allow you to tune your roll/pitch gains for the first few flights.</li>
+</ul>
+</blockquote>
+<p>官网关于定高说明的介绍：</p>
+<blockquote>
+<p>如果油門在40% ~ 60%之間，飛行器會維持當時高度。<br>在油門的中間無效區之外（40%以下或60%以上），飛行器會傷聲或下降，視搖桿偏向而定。搖桿向下打到底，飛行器以2.5公尺/秒速度下降，油門向上打到頂，飛行器以2.5公尺/秒速度上升。這些速度可以由PILOT_VELZ_MAX參數調整。</p>
+</blockquote>
+<p>参数调节</p>
+<blockquote>
+<p>Altitude Hold P值是用來把高度誤差（要求高度和實際高度的差距）換算為上升或下降速度。較高的P值會比較靈敏地維持高度，但是設得太高會使油門反應好像抽筋一樣。</p>
+<p>Throttle Rate (通常不需要調校) 把要求的上升或下降速度換算為要求的向上或向下的加速度。</p>
+<p>Throttle Accel PID 值把加速度誤差（要求加速度和實際加速度的誤差）換算為馬達的輸出。如果你要修改P跟I這兩個參數時應該要維持P:I為1:2 的比例(I是P的兩倍)。這些數值應該永遠不會去增加，但如果您的飛行品的動力非常大時將它們各降低50%將會反應更為良好(就是P降為0.5，I降為1.0)。</p>
+</blockquote>
+<p>也就是说如果从自稳时的悬停切换到定高，如果此时油门在40%~60%之间，飞行器一般就能维持现在的高度。这时他有一个死区，就是油门在40%-60%,无论如何操作，飞行器应该高度不变。</p>
+<p>但如果你自稳模式下，悬停的油门低于40%(exmple:30%)，切换到定高时，假设油门杆在30%，低于死区，所以他会猛然下降。高于60%的话，切换到定高时，假设油门杆在70%，高于死区，所以他会猛然上升。其速率由Altitude Hold P控制(待验证)。</p>
+<p>所以解决办法就是，避免用定高起飞，先用自稳飞到悬停时的那个油门（尽量调整在操作杆的40%，60%位置，如果高或者低用以下<a href="http://copter.ardupilot.com/wiki/ac_throttlemid/" target="_blank" rel="external">方法</a>调整油门中位，或者可以调整死区范围），保证悬停后，再切换定高模式。</p>
+<p>附GPS飞行路线图<br><img src="http://7xk7fp.com1.z0.glb.clouddn.com/Image%206.jpg" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/11/24/px4-analyze/" data-id="cjls7psjg0017c6sgxcaeo8o8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pixhawk/">pixhawk</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/27/pixhawk/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          编译APM源码基于pixhawk硬件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/16/delete-remote-repository-folder/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">删除远程仓库的文件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pixhawk/">pixhawk</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protocal/">protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活，婚礼，朋友/">生活，婚礼，朋友</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科研/">科研</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodeJs-protocal/" style="font-size: 10px;">nodeJs,protocal</a> <a href="/tags/pixhawk/" style="font-size: 17.5px;">pixhawk</a> <a href="/tags/protocal/" style="font-size: 10px;">protocal</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/生活，婚礼，朋友/" style="font-size: 12.5px;">生活，婚礼，朋友</a> <a href="/tags/科研/" style="font-size: 12.5px;">科研</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <script src="/list-menu.js"></script>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 KenziD<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+       <p>Connect me by Rob10085@gmail.com</p>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

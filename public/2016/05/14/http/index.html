@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>http协议学习笔记 | kenziD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="有部分内容来自Unacceptable Browser HTTP Accept Headers (Yes, You Safari and Internet Explorer)
+报头详解Accept 深入理解属于请求头。客户端对服务端的协商。
+表示接受的 MIME type.
+MIME(Multipurpose Internet Mail Extensions) 表示多功能 Internet 邮件扩">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http协议学习笔记">
+<meta property="og:url" content="http://yoursite.com/2016/05/14/http/index.html">
+<meta property="og:site_name" content="kenziD">
+<meta property="og:description" content="有部分内容来自Unacceptable Browser HTTP Accept Headers (Yes, You Safari and Internet Explorer)
+报头详解Accept 深入理解属于请求头。客户端对服务端的协商。
+表示接受的 MIME type.
+MIME(Multipurpose Internet Mail Extensions) 表示多功能 Internet 邮件扩">
+<meta property="og:updated_time" content="2016-05-20T09:46:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="http协议学习笔记">
+<meta name="twitter:description" content="有部分内容来自Unacceptable Browser HTTP Accept Headers (Yes, You Safari and Internet Explorer)
+报头详解Accept 深入理解属于请求头。客户端对服务端的协商。
+表示接受的 MIME type.
+MIME(Multipurpose Internet Mail Extensions) 表示多功能 Internet 邮件扩">
+  
+    <link rel="alternative" href="/atom.xml" title="kenziD" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kenziD</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A Girl Who Love Programming</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-http" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/14/http/" class="article-date">
+  <time datetime="2016-05-14T07:38:48.000Z" itemprop="datePublished">2016-05-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      http协议学习笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有部分内容来自<a href="http://www.newmediacampaigns.com/blog/browser-rest-http-accept-headers" target="_blank" rel="external">Unacceptable Browser HTTP Accept Headers (Yes, You Safari and Internet Explorer)</a></p>
+<h2 id="报头详解">报头详解</h2><h3 id="Accept_深入理解">Accept 深入理解</h3><p>属于请求头。客户端对服务端的协商。</p>
+<p>表示接受的 MIME type.</p>
+<p>MIME(Multipurpose Internet Mail Extensions) 表示多功能 Internet 邮件扩充服务。本来是用来定义邮件接受的媒体类型。后来被应用到http协议上后，内容就变得多种多样了。一共有七种<br>text,img,video,audio,multipart,application,<br>其中他们还有子类。比如text/html,text/plain,img/jpeg,img/gif等。</p>
+<p>格式为：*/*;q=float 用分号分隔; 默认情况为q=1。q表示用户对某种类型的接受程度。</p>
+<p>比如：chrome 浏览器下：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET <span class="regexp">/Protocols/</span>rfc2616<span class="regexp">/rfc2616-sec7.html HTTP/</span><span class="number">1.1</span></span><br><span class="line"><span class="string">Host:</span> www.w3.org</span><br><span class="line"><span class="string">Accept:</span>text<span class="regexp">/html,application/</span>xhtml+xml,application<span class="regexp">/xml;q=0.9,image/</span>webp,*<span class="comment">/*;q=0.8</span></span><br></pre></td></tr></table></figure></p>
+<p>表示:</p>
+<p>如果有text/html image/webp application/xhtml+xml这些格式最好。100%</p>
+<p>如果上面的都没有，给我xml格式。90%</p>
+<p>如果还是没有就给我啥都行。80%</p>
+<p>再比如：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept: <span class="built_in">text</span>/*;q=<span class="number">0.3</span>, <span class="built_in">text</span>/html;q=<span class="number">0.7</span>, <span class="built_in">text</span>/html;level=<span class="number">1</span>,<span class="built_in">text</span>/html;level=<span class="number">2</span>;q=<span class="number">0.4</span>, */*;q=<span class="number">0.5</span></span><br></pre></td></tr></table></figure></p>
+<p>text/html;level=1         = 1</p>
+<p>text/html                 = 0.7</p>
+<p>text/plain                = 0.3</p>
+<p>image/jpeg                = 0.5</p>
+<p>text/html;level=2         = 0.4</p>
+<p>text/html;level=3         = 0.7</p>
+<p>我在想，请求行里的url的扩展里已经包括了资源的类型:.html,.jpeg等，为什么还要通过accept告诉服务器自己接受什么类型的文件呢？猜想直接指明类型会更快的响应请求。省的解析url里的类型。也有的不一定就能返回特定的指定类型，如果没有，也可以用其他类型代替。有一定的容错性。而且不一定url的请求就是一个指定的文件，可能只是某个文件夹。</p>
+<p>不过听说，这些服务商都不用accept：</p>
+<blockquote>
+<p>As stated, Twitter’s REST API doesn’t use the Accept header for content-negotiation, they use extensions on the URL ‘.json’ and ‘.xml’.</p>
+<p>Rails disables the Accept header by default. </p>
+<p>Frameworks can enhance performance by ignoring the Accept header and relying on ‘.xml’-like extensions.</p>
+<p>As such the next release of the Recess Framework, too, will disable Accept header based content-negotiation by default.</p>
+</blockquote>
+<p>这里的twitter就是直接通过解析扩展来确定类型的。</p>
+<p>因为不同的浏览器对于某种类型的文件都有自己特定的accept定义，告诉服务器自己接受什么类型的文件。<br>如：firefox浏览器对于html文件的accept是：</p>
+<blockquote>
+<p>text/html,application/xhtml+xml,application/xml;q=0.9,<em>/</em>;q=0.8</p>
+</blockquote>
+<p>表示</p>
+<blockquote>
+<p>Dear host,<br>I want the resource in an HTML or XHTML format. If you cannot serve me this way, I’ll take it in an XML instead. If you can’t even give it to me in XML, well, I’ll take anything you’ve got!<br>Love,<br>Firefox</p>
+</blockquote>
+<p>ie 呢，就发一大堆：</p>
+<blockquote>
+<p>image/jpeg, application/x-ms-application, image/gif, application/xaml+xml, image/pjpeg, application/x-ms-xbap, application/x-shockwave-flash, application/msword, <em>/</em></p>
+</blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation" target="_blank" rel="external">具体不同浏览器的文件类型对应的accept形式</a></p>
+<h2 id="content-type">content-type</h2><p>content-type不管是请求还是响应都应该有。</p>
+<p>响应中的content-type很好理解。通过请求中的accept来告知响应内容的类型。</p>
+<p>那么请求中的content-type又是什么意思呢？</p>
+<p>如果是post方法，那么空格后的那个message-body 里的格式就可以由content-type来传达。比如form。application/x-www-form-urlencoded or multipart/form-data</p>
+<p>但如果是get方法呢？为什么需要这个东西？</p>
+<p>我发现如果把响应中的content-type写成text/html 刷新时浏览器会渲染html页面。而如果把content-type写成img/jpeg，刷新chrome浏览器的时候会直接下载文件。可能这就是chrome浏览器针对http协议的一些设置。看来了解http协议这种约定俗称的规范，可以让浏览器帮助完成一些事情。</p>
+<h2 id="区别">区别</h2><p>content－type和accept有啥区别呢？虽然都规定了mime的类型，<br>缓存机制：</p>
+<p>HTTP定义了3种缓存机制：<br>l Freshness allows a response to be used without re-checking it on the origin server, and can be controlled by both the server and the client. For example, the Expires response header gives a date when the document becomes stale, and the Cache-Control: max-age directive tells the cache how many seconds the response is fresh for.<br>l Validation can be used to check whether a cached response is still good after it becomes stale. For example, if the response has a Last-Modified header, a cache can make a conditional request using the If-Modified-Since header to see if it has changed.<br>l Invalidation is usually a side effect of another request that passes through the cache. For example, if URL associated with a cached response subsequently gets a POST, PUT or DELETE request, the cached response will be invalidated.</p>
+<p>也就是说post发送的东西都不会被缓存，get方法发送的会被缓存哦。</p>
+<h2 id="参考">参考</h2><p><a href="http://www.chedong.com/tech/cache_docs.html" target="_blank" rel="external">面向站长和网站管理员的Web缓存加速指南</a><br><a href="https://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank" rel="external">Hypertext Transfer Protocol — HTTP/1.1</a><br><a href="https://www.zybuluo.com/yangfch3/note/167490" target="_blank" rel="external">HTTP协议详解</a><br><a href="https://www.zybuluo.com/yangfch3/note/113028" target="_blank" rel="external">输入网址之后发生了什么</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/14/http/" data-id="cjls7psjb0012c6sg45f6olce" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/protocal/">protocal</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/17/字符串编码/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          字符串编码
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/08/promise/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">初探promise</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pixhawk/">pixhawk</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protocal/">protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活，婚礼，朋友/">生活，婚礼，朋友</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科研/">科研</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodeJs-protocal/" style="font-size: 10px;">nodeJs,protocal</a> <a href="/tags/pixhawk/" style="font-size: 17.5px;">pixhawk</a> <a href="/tags/protocal/" style="font-size: 10px;">protocal</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/生活，婚礼，朋友/" style="font-size: 12.5px;">生活，婚礼，朋友</a> <a href="/tags/科研/" style="font-size: 12.5px;">科研</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <script src="/list-menu.js"></script>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 KenziD<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+       <p>Connect me by Rob10085@gmail.com</p>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
