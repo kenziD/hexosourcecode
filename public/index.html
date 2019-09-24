@@ -65,6 +65,88 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-uploadfile" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/02/uploadfile/" class="article-date">
+  <time datetime="2019-04-01T16:02:20.000Z" itemprop="datePublished">2019-04-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/02/uploadfile/">上传文件multipart/form-data深入解析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上传文件是一个前端常见的需求，但是为什么上传文件必须使用content-type:multipart/form-data作为请求头?</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/04/02/uploadfile/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/02/uploadfile/" data-id="cjubbxw1j001ypjsgy83qo6ee" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-从vue源码角度分析v-text和-插值的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/20/从vue源码角度分析v-text和-插值的区别/" class="article-date">
+  <time datetime="2019-01-19T16:02:20.000Z" itemprop="datePublished">2019-01-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/20/从vue源码角度分析v-text和-插值的区别/">从vue源码角度分析v-text和{{}}插值的区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题描述：">问题描述：</h2><p>在做生成表格的需求时，遇到需要手动在单元格输入文字，并生成表头：即实现可编辑效果的功能。发现可以通过设置标签的contenteditable属性来实现任意html元素可编辑,并且把用户输入赋值给变量。这时，在vue框架下，就想到了双向数据绑定绑定输入值。但因为这不是input表单标签，无法直接使用v-model指令，一般是使用创建组件的方式实现双向数据绑定。但我当时第一直觉想到的是双花括号方式绑定。并遇到了一个坑，在此记录下来。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/01/20/从vue源码角度分析v-text和-插值的区别/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/20/从vue源码角度分析v-text和-插值的区别/" data-id="cjubbxw16001hpjsg02q7jix6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-inline-block元素的诡异样式问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/12/inline-block元素的诡异样式问题/" class="article-date">
@@ -87,24 +169,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="记录一次inline-block引起的诡异样式错位">记录一次inline-block引起的诡异样式错位</h3><p><img src="cssp.PNG" alt=""><br>想在colorPicker后面加一个icon，点击增加就可以继续增加colorPicker，<br>用了一个div套i标签，然后设置div为inline-block，但是发现这个div和前面的colorPicker的div怎么都不在一条水平线上。特别尴尬。<br>同样都是inline-block布局，到底哪里出了问题。<br>后来仔细看了zxx大佬的博客<a href="https://www.zhangxinxu.com/wordpress/2015/08/css-deep-understand-vertical-align-and-line-height/" target="_blank" rel="external">CSS深入理解vertical-align和line-height的基友关系</a>，终于找到了理论基础<a href="https://www.w3.org/TR/CSS21/visudet.html#propdef-vertical-align" target="_blank" rel="external">w3c可视化格式模型文档</a>：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The baseline <span class="keyword">of</span> <span class="keyword">an</span> <span class="string">'inline-block'</span> is <span class="keyword">the</span> baseline <span class="keyword">of</span> its <span class="keyword">last</span> <span class="built_in">line</span> box <span class="keyword">in</span> <span class="keyword">the</span> <span class="keyword">normal</span> flow, unless <span class="keyword">it</span> has either no <span class="keyword">in</span>-flow <span class="built_in">line</span> boxes <span class="keyword">or</span> <span class="keyword">if</span> its <span class="string">'overflow'</span> property has <span class="keyword">a</span> computed <span class="built_in">value</span> other than <span class="string">'visible'</span>, <span class="keyword">in</span> which <span class="keyword">case</span> <span class="keyword">the</span> baseline is <span class="keyword">the</span> bottom margin edge.</span><br></pre></td></tr></table></figure></p>
-<p>意思就是：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个inline-block元素，如果里面没有inline内联元素，或者<span class="attribute">overflow</span>不是visible，则该元素的基线就是其<span class="attribute">margin</span>底边缘，否则，其基线就是元素里面最后一行内联元素的基线</span><br></pre></td></tr></table></figure></p>
-<p>这就解释了本文中的两个inline-block元素无法对齐：<br>因为colorPicker的div里面没有inline内联元素，所以其基线就是margin底边缘。<br>但是我的icon div盒子里有一个i标签是inline内联元素，所以其基线是i标签内联元素的基线。</p>
-<p>zxx博客的这部分内容很好的复现了上述问题。<br><img src="exa.png" alt=""></p>
-<p>针对博客最后的那个例子我做了几个demo，和博客对比着看。</p>
-<ol>
-<li><p>通过那个规则，改变inline-block基线的位置，从而间距消除<br><img src="a.gif" alt=""></p>
-</li>
-<li><p>通过改变font-size使基线和中线重合<br><img src="b.gif" alt=""></p>
-</li>
-<li><p>通过改变vertical-align的规则，不要基线对齐。从而消除间距<br><img src="c.gif" alt=""></p>
-</li>
-</ol>
-
+        <h3 id="记录一次inline-block引起的诡异样式错位">记录一次inline-block引起的诡异样式错位</h3><p><img src="cssp.PNG" alt=""><br>想在colorPicker后面加一个icon，点击增加就可以继续增加colorPicker，<br>用了一个div套i标签，然后设置div为inline-block，但是发现这个div和前面的colorPicker的div怎么都不在一条水平线上。特别尴尬。<br>同样都是inline-block布局，到底哪里出了问题。</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/07/12/inline-block元素的诡异样式问题/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/12/inline-block元素的诡异样式问题/" data-id="cjls7psir000mc6sgt7piak4z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/12/inline-block元素的诡异样式问题/" data-id="cjubbxw0o000ppjsgl1f8qghe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -146,7 +220,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/30/4xx/" data-id="cjls7psi00005c6sghf3jd9pf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/30/4xx/" data-id="cjubbxvzw0000pjsg0c9hhjnb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -191,47 +265,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/22/pure-nodejs-simple-server/" data-id="cjls7psjp001cc6sgggxy0cjh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/22/pure-nodejs-simple-server/" data-id="cjubbxw0v0011pjsgzsgfzw8z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-nodeJsSimpleServer" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/22/nodeJsSimpleServer/" class="article-date">
-  <time datetime="2016-05-21T16:25:50.000Z" itemprop="datePublished">2016-05-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/22/nodeJsSimpleServer/">nodeJsSimpleServer</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/22/nodeJsSimpleServer/" data-id="cjls7psjx001jc6sgh31alz8p" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -288,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/17/字符串编码/" data-id="cjls7pskc001rc6sg9h13e470" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/17/字符串编码/" data-id="cjubbxw17001jpjsg670fjavw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -375,7 +413,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/14/http/" data-id="cjls7psjb0012c6sg45f6olce" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/14/http/" data-id="cjubbxw0j000kpjsgcb7e1c6a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/protocal/">protocal</a></li></ul>
@@ -418,7 +456,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/08/promise/" data-id="cjls7psj90010c6sgvaku15ar" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/08/promise/" data-id="cjubbxw0q000tpjsgb7xx1nju" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -460,7 +498,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/07/gitError/" data-id="cjls7psil000ic6sgtwmr94f9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/07/gitError/" data-id="cjubbxw0b000cpjsgmrjhqp8d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -503,54 +541,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/31/json-format/" data-id="cjls7psj0000sc6sgqo5hnp24" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/31/json-format/" data-id="cjubbxw0m000opjsgttzbf1ix" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-css-specifity" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/24/css-specifity/" class="article-date">
-  <time datetime="2016-03-24T11:53:48.000Z" itemprop="datePublished">2016-03-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/24/css-specifity/">CSS 权重</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>对css权重的概念理解的并不深入，很多是流于表面。先从css权重讲起吧。</p>
-<p>本文参考了：<br><a href="http://www.w3cplus.com/css/css-specificity-things-you-should-know.html">你应该知道的一些事情——CSS权重</a></p>
-        
-          <p class="article-more-link">
-            <a href="/2016/03/24/css-specifity/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/24/css-specifity/" data-id="cjls7psi70008c6sghz3zv5pu" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
 
     </footer>
   </div>
@@ -603,7 +597,7 @@
   <script src="/list-menu.js"></script>
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2018 KenziD<br>
+      &copy; 2019 KenziD<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
        <p>Connect me by Rob10085@gmail.com</p>
     </div>
