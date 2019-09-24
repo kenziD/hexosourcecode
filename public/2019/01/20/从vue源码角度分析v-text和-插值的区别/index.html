@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>从vue源码角度分析v-text和{{}}插值的区别 | kenziD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="问题描述：在做生成表格的需求时，遇到需要手动在单元格输入文字，并生成表头：即实现可编辑效果的功能。发现可以通过设置标签的contenteditable属性来实现任意html元素可编辑,并且把用户输入赋值给变量。这时，在vue框架下，就想到了双向数据绑定绑定输入值。但因为这不是input表单标签，无法直接使用v-model指令，一般是使用创建组件的方式实现双向数据绑定。但我当时第一直觉想到的是双花括">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从vue源码角度分析v-text和{{}}插值的区别">
+<meta property="og:url" content="http://yoursite.com/2019/01/20/从vue源码角度分析v-text和-插值的区别/index.html">
+<meta property="og:site_name" content="kenziD">
+<meta property="og:description" content="问题描述：在做生成表格的需求时，遇到需要手动在单元格输入文字，并生成表头：即实现可编辑效果的功能。发现可以通过设置标签的contenteditable属性来实现任意html元素可编辑,并且把用户输入赋值给变量。这时，在vue框架下，就想到了双向数据绑定绑定输入值。但因为这不是input表单标签，无法直接使用v-model指令，一般是使用创建组件的方式实现双向数据绑定。但我当时第一直觉想到的是双花括">
+<meta property="og:updated_time" content="2019-09-24T03:57:08.892Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从vue源码角度分析v-text和{{}}插值的区别">
+<meta name="twitter:description" content="问题描述：在做生成表格的需求时，遇到需要手动在单元格输入文字，并生成表头：即实现可编辑效果的功能。发现可以通过设置标签的contenteditable属性来实现任意html元素可编辑,并且把用户输入赋值给变量。这时，在vue框架下，就想到了双向数据绑定绑定输入值。但因为这不是input表单标签，无法直接使用v-model指令，一般是使用创建组件的方式实现双向数据绑定。但我当时第一直觉想到的是双花括">
+  
+    <link rel="alternative" href="/atom.xml" title="kenziD" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kenziD</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A Girl Who Love Programming</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-从vue源码角度分析v-text和-插值的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/20/从vue源码角度分析v-text和-插值的区别/" class="article-date">
+  <time datetime="2019-01-19T16:02:20.000Z" itemprop="datePublished">2019-01-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      从vue源码角度分析v-text和{{}}插值的区别
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题描述：">问题描述：</h2><p>在做生成表格的需求时，遇到需要手动在单元格输入文字，并生成表头：即实现可编辑效果的功能。发现可以通过设置标签的contenteditable属性来实现任意html元素可编辑,并且把用户输入赋值给变量。这时，在vue框架下，就想到了双向数据绑定绑定输入值。但因为这不是input表单标签，无法直接使用v-model指令，一般是使用创建组件的方式实现双向数据绑定。但我当时第一直觉想到的是双花括号方式绑定。</p>
+<h3 id="为什么不能使用v-model">为什么不能使用v-model</h3><p>如果在contenteditable的元素上使用了v-model会报以下错误:</p>
+<blockquote>
+<p>v-model is not supported on this element type. If you are working with contenteditable, it’s recommended to wrap a library dedicated for that purpose inside a custom component.</p>
+</blockquote>
+<p>v-model仅仅支持input、textarea、select表单元素,这点以及报错信息从源码上也可以看出来:</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (el.component) &#123;</span><br><span class="line">      genComponentModel(el, value, modifiers);</span><br><span class="line">      <span class="comment">// component v-model doesn't need extra runtime</span></span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">tag</span> === <span class="string">'select'</span>) &#123;</span><br><span class="line">      genSelect(el, value, modifiers);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">tag</span> === <span class="string">'input'</span> &amp;&amp; <span class="keyword">type</span> === <span class="string">'checkbox'</span>) &#123;</span><br><span class="line">      genCheckboxModel(el, value, modifiers);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">tag</span> === <span class="string">'input'</span> &amp;&amp; <span class="keyword">type</span> === <span class="string">'radio'</span>) &#123;</span><br><span class="line">      genRadioModel(el, value, modifiers);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">tag</span> === <span class="string">'input'</span> || <span class="built_in">tag</span> === <span class="string">'textarea'</span>) &#123;</span><br><span class="line">      genDefaultModel(el, value, modifiers);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!config.isReservedTag(<span class="built_in">tag</span>)) &#123;</span><br><span class="line">      genComponentModel(el, value, modifiers);</span><br><span class="line">      <span class="comment">// component v-model doesn't need extra runtime</span></span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      warn$<span class="number">1</span>(</span><br><span class="line">        <span class="string">"&lt;"</span> + (el.<span class="built_in">tag</span>) + <span class="string">" v-model=\""</span> + value + <span class="string">"\"&gt;: "</span> +</span><br><span class="line">        <span class="string">"v-model is not supported on this element type. "</span> +</span><br><span class="line">        <span class="string">'If you are working with contenteditable, it\'s recommended to '</span> +</span><br><span class="line">        <span class="string">'wrap a library dedicated for that purpose inside a custom component.'</span></span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用v-text">使用v-text</h3><p>先说解决方案:</p>
+<iframe scrolling="no" width="100%" height="300" src="http://jsfiddle.net/kenzid/txohLkfd/embedded/js,html,css,result/light" frameborder="0" allowfullscreen></iframe>
+<p>其实我一开始并没有想到用v-text的方式解决这个问题。而是想到了使用双花括号mastache的方式。但是这会出现一个匪夷所思的问题:这里是<a href="https://github.com/vuejs/vue/issues/5234" target="_blank" rel="external">issue传送带1</a>,<a href="https://github.com/vuejs/vue/issues/5805" target="_blank" rel="external">issue传送带2</a></p>
+<iframe scrolling="no" width="100%" height="300" src="http://jsfiddle.net/akcbj2z5/1/embedded/js,html,css,result/light" frameborder="0" allowfullscreen></iframe>
+<p>我们发现，contenteditable元素中的文字在失去焦点时重复了两遍！为什么会这样?为什么使用v-text就能绕开这个问题?网上搜到v-text和花括号的区别是花括号是v-text的简写形式。尤雨溪在<a href="https://github.com/vuejs/vue/issues/5805" target="_blank" rel="external">issue</a>中简要回答了花括号和v-text区别:</p>
+<p>[插播:写到这里时我想上传一个vue官方解释v-text的图片，发现七牛云回收了它自己的域名，导致我的图图外链都失效了，我又不想自己去花钱注册一个备案域名。所以想用rp先生的vps搭建一个自己的图床。找到了lychee荔枝图床，然后说需要先安装阿帕奇，php，mysql。。。。我自闭了。下面说使用docker安装最为简单。我又想去看看docker了。。。我的思绪啊.在服务器上按照操作步骤装了半天，发现openvz的vps装不了docker啊。摔。<a href="https://meta.discoursecn.org/t/topic/1227" target="_blank" rel="external">告诉大家一个坑，openVZ的VPS装不了Docker</a>，我回来了。已是2小时以后。]</p>
+<blockquote>
+<p>This type of usage will be a wontfix. v-text or v-html works by wiping away the pre-existing content with completely new nodes; however when you use mastache bindings Vue will attempt to diff the text nodes - which will likely be made out of sync by contenteditable because how browsers handle/split the text nodes are completely unpredictable.</p>
+</blockquote>
+<p>翻译一下:</p>
+<blockquote>
+<p>这种用法导致的问题将不会修复。使用v-text和v-html将会把元素之前存在的content完全用(vue生成的)新的nodes替换掉;然而如果使用花括号绑定vue将会尝试比较文本节点，由于浏览器操作拆分文本节点的行为完全无法预测，所以使用contenteditable属性(dom和变量)极有可能无法同步。</p>
+</blockquote>
+<p>这到底是啥意思？</p>
+<h2 id="从源码上分析花括号的行为">从源码上分析花括号的行为</h2><p>我们知道在 Vue.js 中我们可以采用简洁的模板语法来声明式的将数据渲染为 DOM[<a href="https://ustbhuangyi.github.io/vue-analysis/data-driven/" target="_blank" rel="external">1</a>]。流程是:<br>new vue()</p>
+<h3 id="reference:">reference:</h3><p><a href="https://ustbhuangyi.github.io/vue-analysis/data-driven/" target="_blank" rel="external">1.Vue.js 技术揭秘—数据驱动</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/20/从vue源码角度分析v-text和-插值的区别/" data-id="ck0xbc4ac001l6jsgefn6t3z7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/12/inline-block元素的诡异样式问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">inline-block元素的诡异样式问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pixhawk/">pixhawk</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protocal/">protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活，婚礼，朋友/">生活，婚礼，朋友</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科研/">科研</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodeJs-protocal/" style="font-size: 10px;">nodeJs,protocal</a> <a href="/tags/pixhawk/" style="font-size: 17.5px;">pixhawk</a> <a href="/tags/protocal/" style="font-size: 10px;">protocal</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/生活，婚礼，朋友/" style="font-size: 12.5px;">生活，婚礼，朋友</a> <a href="/tags/科研/" style="font-size: 12.5px;">科研</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <script src="/list-menu.js"></script>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 KenziD<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+       <p>Connect me by Rob10085@gmail.com</p>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
