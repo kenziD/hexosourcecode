@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>上传文件multipart/form-data深入解析 | kenziD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上传文件是一个前端常见的需求，但是为什么上传文件必须使用content-type:multipart/form-data作为请求头?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="上传文件multipart/form-data深入解析">
+<meta property="og:url" content="http://yoursite.com/2019/04/02/uploadfile/index.html">
+<meta property="og:site_name" content="kenziD">
+<meta property="og:description" content="上传文件是一个前端常见的需求，但是为什么上传文件必须使用content-type:multipart/form-data作为请求头?">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/3/30/169ce841d11bd503?w=1606&h=414&f=jpeg&s=542680">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/4/2/169de0d68c11cd41?w=2398&h=912&f=jpeg&s=1255308">
+<meta property="og:updated_time" content="2019-04-10T14:47:56.807Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="上传文件multipart/form-data深入解析">
+<meta name="twitter:description" content="上传文件是一个前端常见的需求，但是为什么上传文件必须使用content-type:multipart/form-data作为请求头?">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2019/3/30/169ce841d11bd503?w=1606&h=414&f=jpeg&s=542680">
+  
+    <link rel="alternative" href="/atom.xml" title="kenziD" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kenziD</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A Girl Who Love Programming</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-uploadfile" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/02/uploadfile/" class="article-date">
+  <time datetime="2019-04-01T16:02:20.000Z" itemprop="datePublished">2019-04-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      上传文件multipart/form-data深入解析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上传文件是一个前端常见的需求，但是为什么上传文件必须使用content-type:multipart/form-data作为请求头?</p>
+<a id="more"></a>
+<h2 id="起源:multipart/form-data定义源头">起源:multipart/form-data定义源头</h2><p>multipart/form-data最初由<a href="https://www.ietf.org/rfc/rfc1867.txt" target="_blank" rel="external"> 《RFC 1867: Form-based File Upload in HTML》</a>文档提出。</p>
+<blockquote>
+<p>Since file-upload is a feature that will benefit many applications, this proposes an<br>extension to HTML to allow information providers to express file upload requests uniformly, and a MIME compatible representation for file upload responses.</p>
+</blockquote>
+<p>1867文档简介中说明文件上传作为一种常见的需求，在目前(1995年)的html中的form表单格式中还不支持，因此提出了一种兼容此需求的mime type。</p>
+<blockquote>
+<p>The encoding type application/x-www-form-urlencoded is inefficient for sending large quantities of binary data or text containing non-ASCII characters.  Thus, a new media type,multipart/form-data, is proposed as a way of efficiently sending the<br>values associated with a filled-out form from client to server.</p>
+</blockquote>
+<p>1867文档中也写了为什么要新增一个类型，而不使用旧有的application/x-www-form-urlencoded：因为此类型不适合用于传输大型二进制数据或者包含非ASCII字符的数据。平常我们使用这个类型都是把表单数据使用url编码后传送给后端，二进制文件当然没办法一起编码进去了。所以multipart/form-data就诞生了，专门用于有效的传输文件。</p>
+<blockquote>
+<p>On the other hand, the<br>   ‘multipart’ mechanisms are well established, simple to implement on<br>   both the sending client and receiving server, and as efficient as<br>   other methods of dealing with multiple combinations of binary data.</p>
+</blockquote>
+<p>文档中还解释了为什么要沿用multipart这个机制。multipart机制的定义在<a href="https://www.w3.org/Protocols/rfc1341/7_2_Multipart.html" target="_blank" rel="external">《RFC 1314 - A File Format for the Exchange of Images in the Internet》的7.2 The Multipart Content-Type小节</a></p>
+<p>但这个1867文档中对 multipart/form-data 的具体格式并没有写的非常详细，只在第六部分的【Examples】当中给了一个很基本的范例，所以 1998 年又有了一份新的<a href="https://tools.ietf.org/html/rfc2388" target="_blank" rel="external">《RFC 2388：Returning Values from Forms: multipart/form-data 》</a>，来阐明不仅在HTTP协议下传输文件、而且使用邮件传输文件时 multipart/form-data 中的各个部分的具体格式<sup><a href="https://moxo.io/blog/2016/11/12/html-form-submit-urlencode-and-multipart-formdata/" target="_blank" rel="external">[1]</a></sup>。分别对3.Definition of multipart/form-datamultipart/form-data的定义；4.Use of multipart/form-data具体使用格式和方法做了更详细的阐述，其中第四章包括:</p>
+<h5 id="4-1封装线的格式">4.1封装线的格式</h5><h5 id="4-2多文件时应使用multipart/mixed">4.2多文件时应使用multipart/mixed</h5><p>（编者注:实验了一下任何浏览器发送多个文件时都没有实现这个配置[2019-4-5]）但如果发送一封邮件，并使用fiddler抓包，可以看出邮件源码格式还是有严格遵循2388文档规范的。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">https://outlook.office365.com/Microsoft-Server-ActiveSync?jAEECBBv8Usp+29k8LM6azAOecgZBAAAAAALV2luZG93c01haWz/AwEMAQ==</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Cache-Control</span>: no-cache</span><br><span class="line"><span class="attribute">Connection</span>: Keep-Alive</span><br><span class="line"><span class="attribute">Pragma</span>: no-cache</span><br><span class="line"><span class="attribute">Content-Type</span>: application/vnd.ms-sync</span><br><span class="line"><span class="attribute">Authorization</span>: ...</span><br><span class="line"><span class="attribute">X-MS-WL</span>: WindowsPhone/8.0</span><br><span class="line"><span class="attribute">X-WLAS-Tracing</span>: true</span><br><span class="line"><span class="attribute">Content-Length</span>: 1498610</span><br><span class="line"><span class="attribute">Host</span>: outlook.office365.com</span><br><span class="line"><span class="attribute">Cookie</span>: DefaultAnchorMailbox=yyyy@qq.com</span><br><span class="line"></span><br><span class="line"><span class="groovy">j  EQoid&#123;<span class="number">0</span>:b&#125; P ۻWMIME-<span class="string">Version:</span> <span class="number">1.0</span></span><br><span class="line"><span class="string">To:</span> <span class="string">"xxxx@gmail.com"</span> &lt;xxxx<span class="meta">@gmail</span>.com&gt;</span><br><span class="line"><span class="string">From:</span> </span><br><span class="line"><span class="string">Subject:</span> =?utf-8?Q?test=E9=82=AE=E4=BB=B6=E6=A0=BC=E5=BC=8F?=</span><br><span class="line">Date: Fri, <span class="number">5</span> Apr <span class="number">2019</span> <span class="number">19</span>:<span class="number">43</span>:<span class="number">35</span> +<span class="number">0800</span></span><br><span class="line"><span class="string">Importance:</span> normal</span><br><span class="line">X-<span class="string">Priority:</span> <span class="number">3</span></span><br><span class="line">Content-<span class="string">Type:</span> multipart/mixed;</span><br><span class="line">	boundary=<span class="string">"_8A0F7060-4F31-4015-9BED-E2D8315920AF_"</span></span><br><span class="line"></span><br><span class="line">--_8A0F7060<span class="number">-4</span>F31<span class="number">-4015</span><span class="number">-9</span>BED-E2D8315920AF_</span><br><span class="line">Content-<span class="string">Type:</span> multipart/alternative;</span><br><span class="line">	boundary=<span class="string">"_997001FE-F8E8-4F97-ACC0-BBA66B0710A5_"</span></span><br><span class="line"></span><br><span class="line">--_997001FE-F8E8<span class="number">-4</span>F97-ACC0-BBA66B0710A5_</span><br><span class="line">Content-Transfer-<span class="string">Encoding:</span> base64</span><br><span class="line">Content-<span class="string">Type:</span> text/plain; charset=<span class="string">"utf-8"</span></span><br><span class="line"></span><br><span class="line">DQoNCuWPkemAgeiHqiBXaW5kb3dzIDEwIOeJiOmCruS7tuW6lOeUqA0KDQo=</span><br><span class="line"></span><br><span class="line">--_997001FE-F8E8<span class="number">-4</span>F97-ACC0-BBA66B0710A5_</span><br><span class="line">Content-Transfer-<span class="string">Encoding:</span> quoted-printable</span><br><span class="line">Content-<span class="string">Type:</span> text/html; charset=<span class="string">"utf-8"</span></span><br><span class="line"></span><br><span class="line">文件内容....</span><br><span class="line"></span><br><span class="line">--_997001FE-F8E8<span class="number">-4</span>F97-ACC0-BBA66B0710A5_--</span><br><span class="line"></span><br><span class="line">--_8A0F7060<span class="number">-4</span>F31<span class="number">-4015</span><span class="number">-9</span>BED-E2D8315920AF_</span><br><span class="line">Content-<span class="string">Type:</span> image/png; name=<span class="string">"upload.png"</span></span><br><span class="line">Content-Transfer-<span class="string">Encoding:</span> base64</span><br><span class="line">Content-<span class="string">Disposition:</span> attachment; filename=<span class="string">"upload.png"</span></span><br><span class="line"></span><br><span class="line">图片内容...</span></span><br></pre></td></tr></table></figure>
+<h2 id="实例分析">实例分析</h2><p>下面举几个栗子:<br>先使用get方法和post方法，但不写enctype，即以默认的application/x-www-form-urlencoded表格数据格式进行表单请求:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	使用get请求,使用application/x-www-form-urlencoded请求头</span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"get"</span> <span class="attr">action</span>=<span class="string">"xxx"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>name<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"name"</span> <span class="attr">name</span>=<span class="string">"name"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"file"</span>&gt;</span>file<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"file"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"submit"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">    使用post请求,使用application/x-www-form-urlencoded请求头</span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">action</span>=<span class="string">"xxx"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>name<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"name"</span> <span class="attr">name</span>=<span class="string">"name"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"file"</span>&gt;</span>file<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"file"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"submit"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>windows上使用任何一种服务器(这里使用了iis起在了本机地址1333端口)vs code的go live也可以，并使用了fiddler监听网络请求。如果是在linux可以也可以使用在终端中输入:while :; do clear; nc -l localhost 1333; sleep 2; done的<a href="https://moxo.io/blog/2016/11/12/html-form-submit-urlencode-and-multipart-formdata/" target="_blank" rel="external">方式</a>监听端口。<br>网络请求区别如下:</p>
+<figure class="image"><br>  <img src="https://user-gold-cdn.xitu.io/2019/3/30/169ce841d11bd503?w=1606&h=414&f=jpeg&s=542680" alt="get post对比图"><br>  <figcaption>图1.1</figcaption><br></figure>
+
+<p>发现post方法和get方法都只是把文件名编码进了url中，文件内容无法得到，这也证实了上述文档中的内容，使用application/x-www-form-urlencoded无法实现文件上传。</p>
+<p>若使用enctype=’multipart/form-data’，并分别使用post和get方法提交表单则会得到如下结果:</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">使用get请求,使用multipart/<span class="keyword">form</span>-data请求头</span><br><span class="line">&lt;<span class="keyword">form</span> method=<span class="string">"get"</span> action=<span class="string">"xxx"</span> enctype=<span class="string">"multipart/form-data"</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">label</span> <span class="keyword">for</span>=<span class="string">"name"</span>&gt;name&lt;/<span class="keyword">label</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"text"</span> id=<span class="string">"name"</span> name=<span class="string">"name"</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">label</span> <span class="keyword">for</span>=<span class="string">"file"</span>&gt;<span class="keyword">file</span>&lt;/<span class="keyword">label</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"file"</span> id=<span class="string">"file"</span> name=<span class="string">"file"</span> /&gt;</span><br><span class="line">    &lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"submit"</span> value=<span class="string">"submit"</span> name=<span class="string">"submit"</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">form</span>&gt;</span><br><span class="line">使用<span class="keyword">post</span>请求,使用application/x-www-<span class="keyword">form</span>-urlencoded请求头</span><br><span class="line">&lt;<span class="keyword">form</span> method=<span class="string">"post"</span> action=<span class="string">"xxx"</span> enctype=<span class="string">"multipart/form-data"</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">label</span> <span class="keyword">for</span>=<span class="string">"name"</span>&gt;name&lt;/<span class="keyword">label</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"text"</span> id=<span class="string">"name"</span> name=<span class="string">"name"</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">label</span> <span class="keyword">for</span>=<span class="string">"file"</span>&gt;<span class="keyword">file</span>&lt;/<span class="keyword">label</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"file"</span> id=<span class="string">"file"</span> name=<span class="string">"file"</span> /&gt;</span><br><span class="line">    &lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"submit"</span> value=<span class="string">"submit"</span> name=<span class="string">"submit"</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">form</span>&gt;</span><br></pre></td></tr></table></figure>
+<figure class="image"><br>  <img src="https://user-gold-cdn.xitu.io/2019/4/2/169de0d68c11cd41?w=2398&h=912&f=jpeg&s=1255308" alt="get post对比图"><br>  <figcaption>图1.2</figcaption><br></figure>
+
+<p>可以看到在上传文件中使用get方法是无效的，依然只能得到文件名。而post结合multipart/form-data才能真正将文件内容传入请求体。</p>
+<p>看到提交文件的格式使用一长串字符作为boundtry封装线对字段进行分割。这也很符合multipart多个部分的语义，包含了多个部分集，每一部分都包含了一个content-desposition头，其值为form-data,以及一个name属性，其值为表单的字段名，文件输入框还可以使用filename参数指定文件名。content-type非必须属性，其值会根据文件类型进行变化，默认值是text/plain。multipart的每一个part上方是边缘，最后一个part的下方添加一个边缘。</p>
+<h2 id="参考">参考</h2><ol>
+<li><a href="https://www.ietf.org/rfc/rfc1867.txt" target="_blank" rel="external"> RFC 1867: Form-based File Upload in HTML</a></li>
+<li><a href="https://tools.ietf.org/html/rfc2388" target="_blank" rel="external">RFC 2388: Returning Values from Forms:  multipart/form-data</a></li>
+<li><a href="https://blog.csdn.net/mazhibinit/article/details/49667511" target="_blank" rel="external">为什么上传文件的表单需要设置enctype=”multipart/form-data”</a></li>
+<li><a href="https://moxo.io/blog/2016/11/12/html-form-submit-urlencode-and-multipart-formdata/" target="_blank" rel="external">表单提交中的 x-www-form-urlencoded 和 multipart/form-data</a></li>
+<li><a href="https://www.onmpw.com/tm/xwzj/network_35.html" target="_blank" rel="external">post Upload上传文件中multipart/form-data 做的那些事</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2008/06/mime.html" target="_blank" rel="external">阮一峰的网络日志:MIME笔记</a></li>
+<li><a href="https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.2" target="_blank" rel="external">W3C文档规范:17 Forms</a></li>
+<li><a href="https://www.w3.org/Protocols/rfc1341/7_2_Multipart.html" target="_blank" rel="external">7.2 The Multipart Content-Type(1992)</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/02/uploadfile/" data-id="cjubbxw1j001ypjsgy83qo6ee" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/01/20/从vue源码角度分析v-text和-插值的区别/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">从vue源码角度分析v-text和{{}}插值的区别</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pixhawk/">pixhawk</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protocal/">protocal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活，婚礼，朋友/">生活，婚礼，朋友</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/科研/">科研</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodeJs-protocal/" style="font-size: 10px;">nodeJs,protocal</a> <a href="/tags/pixhawk/" style="font-size: 17.5px;">pixhawk</a> <a href="/tags/protocal/" style="font-size: 10px;">protocal</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/生活，婚礼，朋友/" style="font-size: 12.5px;">生活，婚礼，朋友</a> <a href="/tags/科研/" style="font-size: 12.5px;">科研</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <script src="/list-menu.js"></script>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 KenziD<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+       <p>Connect me by Rob10085@gmail.com</p>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+name: Node CI
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Configuration environment
+        env:
+          ID_RSA: ${{secrets.id_rsa}}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$ID_RSA" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.name 'kenziD'
+          git config --global user.email '1369811517@qq.com'
+      - name: Install dependencies
+        run: |
+          npm i -g hexo-cli
+          npm i
+      - name: Deploy hexo
+        run: |
+          hexo g -d

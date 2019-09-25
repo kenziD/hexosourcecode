@@ -65,6 +65,47 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-uploadfile" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/02/uploadfile/" class="article-date">
+  <time datetime="2019-04-01T16:02:20.000Z" itemprop="datePublished">2019-04-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/02/uploadfile/">上传文件multipart/form-data深入解析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上传文件是一个前端常见的需求，但是为什么上传文件必须使用content-type:multipart/form-data作为请求头?</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/04/02/uploadfile/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/02/uploadfile/" data-id="cjubbxw1j001ypjsgy83qo6ee" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-从vue源码角度分析v-text和-插值的区别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/20/从vue源码角度分析v-text和-插值的区别/" class="article-date">
@@ -87,34 +128,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="问题描述：">问题描述：</h2><p>在做生成表格的需求时，遇到需要手动在单元格输入文字，并生成表头：即实现可编辑效果的功能。发现可以通过设置标签的contenteditable属性来实现任意html元素可编辑,并且把用户输入赋值给变量。这时，在vue框架下，就想到了双向数据绑定绑定输入值。但因为这不是input表单标签，无法直接使用v-model指令，一般是使用创建组件的方式实现双向数据绑定。但我当时第一直觉想到的是双花括号方式绑定。</p>
-<h3 id="为什么不能使用v-model">为什么不能使用v-model</h3><p>如果在contenteditable的元素上使用了v-model会报以下错误:</p>
-<blockquote>
-<p>v-model is not supported on this element type. If you are working with contenteditable, it’s recommended to wrap a library dedicated for that purpose inside a custom component.</p>
-</blockquote>
-<p>v-model仅仅支持input、textarea、select表单元素,这点以及报错信息从源码上也可以看出来:</p>
-<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (el.component) &#123;</span><br><span class="line">      genComponentModel(el, value, modifiers);</span><br><span class="line">      <span class="comment">// component v-model doesn't need extra runtime</span></span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">tag</span> === <span class="string">'select'</span>) &#123;</span><br><span class="line">      genSelect(el, value, modifiers);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">tag</span> === <span class="string">'input'</span> &amp;&amp; <span class="keyword">type</span> === <span class="string">'checkbox'</span>) &#123;</span><br><span class="line">      genCheckboxModel(el, value, modifiers);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">tag</span> === <span class="string">'input'</span> &amp;&amp; <span class="keyword">type</span> === <span class="string">'radio'</span>) &#123;</span><br><span class="line">      genRadioModel(el, value, modifiers);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">tag</span> === <span class="string">'input'</span> || <span class="built_in">tag</span> === <span class="string">'textarea'</span>) &#123;</span><br><span class="line">      genDefaultModel(el, value, modifiers);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!config.isReservedTag(<span class="built_in">tag</span>)) &#123;</span><br><span class="line">      genComponentModel(el, value, modifiers);</span><br><span class="line">      <span class="comment">// component v-model doesn't need extra runtime</span></span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      warn$<span class="number">1</span>(</span><br><span class="line">        <span class="string">"&lt;"</span> + (el.<span class="built_in">tag</span>) + <span class="string">" v-model=\""</span> + value + <span class="string">"\"&gt;: "</span> +</span><br><span class="line">        <span class="string">"v-model is not supported on this element type. "</span> +</span><br><span class="line">        <span class="string">'If you are working with contenteditable, it\'s recommended to '</span> +</span><br><span class="line">        <span class="string">'wrap a library dedicated for that purpose inside a custom component.'</span></span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="使用v-text">使用v-text</h3><p>先说解决方案:</p>
-<iframe scrolling="no" width="100%" height="300" src="http://jsfiddle.net/kenzid/txohLkfd/embedded/js,html,css,result/light" frameborder="0" allowfullscreen></iframe>
-<p>其实我一开始并没有想到用v-text的方式解决这个问题。而是想到了使用双花括号mastache的方式。但是这会出现一个匪夷所思的问题:这里是<a href="https://github.com/vuejs/vue/issues/5234" target="_blank" rel="external">issue传送带1</a>,<a href="https://github.com/vuejs/vue/issues/5805" target="_blank" rel="external">issue传送带2</a></p>
-<iframe scrolling="no" width="100%" height="300" src="http://jsfiddle.net/akcbj2z5/1/embedded/js,html,css,result/light" frameborder="0" allowfullscreen></iframe>
-<p>我们发现，contenteditable元素中的文字在失去焦点时重复了两遍！为什么会这样?为什么使用v-text就能绕开这个问题?网上搜到v-text和花括号的区别是花括号是v-text的简写形式。尤雨溪在<a href="https://github.com/vuejs/vue/issues/5805" target="_blank" rel="external">issue</a>中简要回答了花括号和v-text区别:</p>
-<p>[插播:写到这里时我想上传一个vue官方解释v-text的图片，发现七牛云回收了它自己的域名，导致我的图图外链都失效了，我又不想自己去花钱注册一个备案域名。所以想用rp先生的vps搭建一个自己的图床。找到了lychee荔枝图床，然后说需要先安装阿帕奇，php，mysql。。。。我自闭了。下面说使用docker安装最为简单。我又想去看看docker了。。。我的思绪啊.在服务器上按照操作步骤装了半天，发现openvz的vps装不了docker啊。摔。<a href="https://meta.discoursecn.org/t/topic/1227" target="_blank" rel="external">告诉大家一个坑，openVZ的VPS装不了Docker</a>，我回来了。已是2小时以后。]</p>
-<blockquote>
-<p>This type of usage will be a wontfix. v-text or v-html works by wiping away the pre-existing content with completely new nodes; however when you use mastache bindings Vue will attempt to diff the text nodes - which will likely be made out of sync by contenteditable because how browsers handle/split the text nodes are completely unpredictable.</p>
-</blockquote>
-<p>翻译一下:</p>
-<blockquote>
-<p>这种用法导致的问题将不会修复。使用v-text和v-html将会把元素之前存在的content完全用(vue生成的)新的nodes替换掉;然而如果使用花括号绑定vue将会尝试比较文本节点，由于浏览器操作拆分文本节点的行为完全无法预测，所以使用contenteditable属性(dom和变量)极有可能无法同步。</p>
-</blockquote>
-<p>这到底是啥意思？</p>
-<h2 id="从源码上分析花括号的行为">从源码上分析花括号的行为</h2><p>我们知道在 Vue.js 中我们可以采用简洁的模板语法来声明式的将数据渲染为 DOM[<a href="https://ustbhuangyi.github.io/vue-analysis/data-driven/" target="_blank" rel="external">1</a>]。流程是:<br>new vue()</p>
-<h3 id="reference:">reference:</h3><p><a href="https://ustbhuangyi.github.io/vue-analysis/data-driven/" target="_blank" rel="external">1.Vue.js 技术揭秘—数据驱动</a></p>
-
+        <h2 id="问题描述：">问题描述：</h2><p>在做生成表格的需求时，遇到需要手动在单元格输入文字，并生成表头：即实现可编辑效果的功能。发现可以通过设置标签的contenteditable属性来实现任意html元素可编辑,并且把用户输入赋值给变量。这时，在vue框架下，就想到了双向数据绑定绑定输入值。但因为这不是input表单标签，无法直接使用v-model指令，一般是使用创建组件的方式实现双向数据绑定。但我当时第一直觉想到的是双花括号方式绑定。并遇到了一个坑，在此记录下来。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/01/20/从vue源码角度分析v-text和-插值的区别/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/20/从vue源码角度分析v-text和-插值的区别/" data-id="ck0xbc4ac001l6jsgefn6t3z7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/20/从vue源码角度分析v-text和-插值的区别/" data-id="cjubbxw16001hpjsg02q7jix6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -146,24 +169,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="记录一次inline-block引起的诡异样式错位">记录一次inline-block引起的诡异样式错位</h3><p><img src="cssp.PNG" alt=""><br>想在colorPicker后面加一个icon，点击增加就可以继续增加colorPicker，<br>用了一个div套i标签，然后设置div为inline-block，但是发现这个div和前面的colorPicker的div怎么都不在一条水平线上。特别尴尬。<br>同样都是inline-block布局，到底哪里出了问题。<br>后来仔细看了zxx大佬的博客<a href="https://www.zhangxinxu.com/wordpress/2015/08/css-deep-understand-vertical-align-and-line-height/" target="_blank" rel="external">CSS深入理解vertical-align和line-height的基友关系</a>，终于找到了理论基础<a href="https://www.w3.org/TR/CSS21/visudet.html#propdef-vertical-align" target="_blank" rel="external">w3c可视化格式模型文档</a>：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The baseline <span class="keyword">of</span> <span class="keyword">an</span> <span class="string">'inline-block'</span> is <span class="keyword">the</span> baseline <span class="keyword">of</span> its <span class="keyword">last</span> <span class="built_in">line</span> box <span class="keyword">in</span> <span class="keyword">the</span> <span class="keyword">normal</span> flow, unless <span class="keyword">it</span> has either no <span class="keyword">in</span>-flow <span class="built_in">line</span> boxes <span class="keyword">or</span> <span class="keyword">if</span> its <span class="string">'overflow'</span> property has <span class="keyword">a</span> computed <span class="built_in">value</span> other than <span class="string">'visible'</span>, <span class="keyword">in</span> which <span class="keyword">case</span> <span class="keyword">the</span> baseline is <span class="keyword">the</span> bottom margin edge.</span><br></pre></td></tr></table></figure></p>
-<p>意思就是：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个inline-block元素，如果里面没有inline内联元素，或者<span class="attribute">overflow</span>不是visible，则该元素的基线就是其<span class="attribute">margin</span>底边缘，否则，其基线就是元素里面最后一行内联元素的基线</span><br></pre></td></tr></table></figure></p>
-<p>这就解释了本文中的两个inline-block元素无法对齐：<br>因为colorPicker的div里面没有inline内联元素，所以其基线就是margin底边缘。<br>但是我的icon div盒子里有一个i标签是inline内联元素，所以其基线是i标签内联元素的基线。</p>
-<p>zxx博客的这部分内容很好的复现了上述问题。<br><img src="exa.png" alt=""></p>
-<p>针对博客最后的那个例子我做了几个demo，和博客对比着看。</p>
-<ol>
-<li><p>通过那个规则，改变inline-block基线的位置，从而间距消除<br><img src="a.gif" alt=""></p>
-</li>
-<li><p>通过改变font-size使基线和中线重合<br><img src="b.gif" alt=""></p>
-</li>
-<li><p>通过改变vertical-align的规则，不要基线对齐。从而消除间距<br><img src="c.gif" alt=""></p>
-</li>
-</ol>
-
+        <h3 id="记录一次inline-block引起的诡异样式错位">记录一次inline-block引起的诡异样式错位</h3><p><img src="cssp.PNG" alt=""><br>想在colorPicker后面加一个icon，点击增加就可以继续增加colorPicker，<br>用了一个div套i标签，然后设置div为inline-block，但是发现这个div和前面的colorPicker的div怎么都不在一条水平线上。特别尴尬。<br>同样都是inline-block布局，到底哪里出了问题。</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/07/12/inline-block元素的诡异样式问题/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/12/inline-block元素的诡异样式问题/" data-id="ck0xbc49t000m6jsgjnhtvdg7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/12/inline-block元素的诡异样式问题/" data-id="cjubbxw0o000ppjsgl1f8qghe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -205,7 +220,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/30/4xx/" data-id="ck0xbc49700006jsgyo43pwk5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/30/4xx/" data-id="cjubbxvzw0000pjsg0c9hhjnb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -250,47 +265,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/22/pure-nodejs-simple-server/" data-id="ck0xbc4a200146jsgl39hftjv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/22/pure-nodejs-simple-server/" data-id="cjubbxw0v0011pjsgzsgfzw8z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodeJs-protocal/">nodeJs,protocal</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-nodeJsSimpleServer" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/22/nodeJsSimpleServer/" class="article-date">
-  <time datetime="2016-05-21T16:25:50.000Z" itemprop="datePublished">2016-05-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/22/nodeJsSimpleServer/">nodeJsSimpleServer</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/22/nodeJsSimpleServer/" data-id="ck0xbc49x000t6jsgv6iw3d91" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -347,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/17/字符串编码/" data-id="ck0xbc4ad001n6jsgfaiy6jsu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/17/字符串编码/" data-id="cjubbxw17001jpjsg670fjavw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -434,7 +413,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/14/http/" data-id="ck0xbc49v000p6jsgh8kacodj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/14/http/" data-id="cjubbxw0j000kpjsgcb7e1c6a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/protocal/">protocal</a></li></ul>
@@ -477,7 +456,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/08/promise/" data-id="ck0xbc4a000106jsgtg51bu09" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/08/promise/" data-id="cjubbxw0q000tpjsgb7xx1nju" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
@@ -519,7 +498,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/07/gitError/" data-id="ck0xbc49o000e6jsgdl067awi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/07/gitError/" data-id="cjubbxw0b000cpjsgmrjhqp8d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -562,7 +541,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/31/json-format/" data-id="ck0xbc49w000r6jsgnu4u5fi4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/31/json-format/" data-id="cjubbxw0m000opjsgttzbf1ix" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
